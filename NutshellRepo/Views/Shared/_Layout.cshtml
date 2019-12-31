@@ -12,8 +12,65 @@
 <body>
     <div id="wholePageDiv">
 
+        <div id="headerContainer">
+
+            <header class="container mb-3" id="headerDiv">
+
+                <div id="burgerMenu" onclick="openNav()">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
 
 
+                <div id="userPanel">
+
+                    <div id="avatarThumbnail">
+                        <img src="~/Site/images/nut.jpg" alt="user_img" height="42" width="42" id="userThumb">
+                    </div>
+
+                    <div id="userNameStringDiv">
+                        <a href="#" id="userNameString" title="Profile">pupsiK</a>
+                    </div>
+
+                    <div id="messagesDiv">
+                        <a href="#" class="fas fa-envelope fa-1x" id="envelope" title="New Messages: 32//get from server"></a>
+                    </div>
+
+                </div>
+
+                <div id="createNutshellDiv">
+                    <img src="~/Site/images/nutCol.svg" alt="nut_img" height="48" width="48" id="nutThumb" title="Login to create a Nutshell/Create a Nutshell">
+                </div>
+
+                <form asp-controller="home" asp-action="nutshell" method="get" class="mr-2" id="searchForm">
+
+                    <div class="input-group">
+                        <input class="form-control py-2" type="search" placeholder="Find a Nutshell" id="searchField" pattern=".{2,100}" title="2-100 characters range" name="search">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary btn-sm" onClick="return empty()" type="submit" id="searchBtn">
+                                <i class="fa fa-search" id="mglass"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </header>
+
+        </div>
+
+
+        <div id="mySidenav" class="sidenav">
+
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" title="Close">&times;</a>
+            <a asp-controller="Home" asp-action="Index">Home</a>
+            <a href="#" id="loginA" onclick="openLoginDiv()">Login</a>
+            <a asp-controller="users" asp-action="register">Register</a>
+            <a href="#">Contacts</a>
+            <a href="#">About</a>
+
+        </div>
 
 
 
@@ -28,7 +85,7 @@
 
 
         <footer class="bottom font-small blue footer-links">
-            
+
             <div class="container text-center text-md-left footerLinksContainer">
 
                 <div class="row">
@@ -38,12 +95,12 @@
                         <h5 class="text-uppercase mt-3">In Development</h5>
                         <p>These are the early stages of the project.</p>
 
-                    </div>                  
+                    </div>
 
                     <hr class="clearfix w-100 d-md-none pb-3">
-                   
+
                     <div class="col-md-3 mb-md-0 mb-3 borderLeft">
-                        
+
                         <h5 class="text-uppercase mt-3">Navigation</h5>
 
                         <ul class="list-unstyled">
@@ -62,9 +119,9 @@
                         </ul>
 
                     </div>
-                    
+
                     <div class="col-md-3 mb-md-0 mb-3 borderLeft">
-                                               
+
                         <h5 class="text-uppercase mt-3">Links</h5>
 
                         <ul class="list-unstyled">
@@ -83,15 +140,15 @@
                         </ul>
 
                     </div>
-                   
+
                 </div>
-               
-            </div>            
+
+            </div>
             <!-- Copyright -->
             <div class="footer-copyright text-center py-3">
                 &copy; 2019 - StudyLogBook - <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
-            
+
 
         </footer>
 
@@ -99,6 +156,7 @@
 
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/twitter-bootstrap/js/bootstrap.bundle.min.js"></script>    
+    <script src="~/Site/js/app.js"></script>
     @*Add here when needed shared js*@
     @RenderSection("Scripts", required: false)
 

@@ -18,6 +18,260 @@
 
 
 
+/*Header*/
+#headerContainer {
+    width: 100%;
+    background-color: #847265;
+    border-bottom: 2px solid black;
+    height: 60px;
+    box-shadow: 0 5px 5px black;
+}
+
+
+#headerDiv {
+    display:grid;
+    grid-template-columns: 60px 1fr 60px 1fr;
+    grid-template-rows: 60px;
+    grid-template-areas: " a b c d ";    
+    align-items: center;
+}
+
+#burgerMenu {
+    grid-area: a;    
+    text-align: center;
+    padding-left:6px;
+    padding-top: 12px;
+    margin-top:-2px;    
+    width: 60px;
+    height: 58px;    
+    border-radius: 0px 10px 10px 0;
+    cursor: pointer;
+    transition: 0.4s;    
+}
+
+    #burgerMenu:hover {
+        background-color: #5b4e45;
+    }
+    
+    #burgerMenu:active {
+        background-color: #4b3b30;
+    }
+
+.bar {
+    width: 35px;
+    height: 5px;
+    background-color: wheat;
+    margin: 5px;
+    border-radius: 3px;
+    box-shadow: 0 0 3px black;
+}
+
+#userPanel {
+    grid-area: b;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 230px;
+    /*display:none;*/ /*check if is logged in*/
+}
+
+#avatarThumbnail{
+    
+}
+
+#userThumb {
+    border-radius: 25%;
+    border: 2px solid rgb(40,40,50);
+    box-shadow: -3px 3px 5px black;    
+}
+
+#userNameStringDiv {
+    margin-top: 9px;
+    width: auto;
+    max-width: 150px;
+    overflow: hidden;
+}
+
+#userNameString {
+    margin-left: 5px;
+    margin-right: 5px;    
+    align-items: center;    
+    font-size: 14px;
+    text-shadow: 0px 0px 5px black;
+    text-decoration: underline;
+    color: wheat;
+    font-family: apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";   
+}
+
+#messagesDiv {
+    margin-right: 7px;
+}
+
+#envelope {
+    color: rgb(160,160,170);
+    /*color:wheat;*/ /*this will be needed when cheking for unread messages*/
+    text-decoration: none;
+    transition: 0.3s;
+}
+    #envelope:hover {
+        color: rgba(240,240,250,0.6);
+        transform: scale(1.1);
+    }
+
+    #envelope:active {
+        transform: scale(1.1);
+        margin-top: 6px;
+        text-shadow: none;
+        color: rgba(0,0,0,0.4);
+    }
+
+#createNutshellDiv {
+    grid-area: c;
+    margin-right: auto;
+    margin-left: auto;    
+    border-radius: 0px 0px 10px 10px;
+    transition: 0.2s;
+    margin-top:-10px;
+    
+}
+
+    #createNutshellDiv:hover {
+        margin-top: 0px;
+        transform: rotate(10deg);
+    }
+
+    #createNutshellDiv:active {
+        margin-top:7px;
+        transform:rotate(15deg);
+    }
+
+
+
+#searchForm {
+    grid-area: d;
+    min-width: 200px;
+    max-width: 300px;
+    margin-right: 5px;
+    margin-left: auto;
+}
+
+#searchField {
+    background-color: wheat;
+    border: 2px solid rgb(40,40,50);
+    border-radius: 5px 0px 0px 5px;
+}
+#searchField:focus {    
+    box-shadow:0 0 5px wheat;
+}
+#searchBtn {
+    color: wheat;
+    border-radius: 0px 5px 5px 0px;
+    border: 2px solid rgb(50,50,50);
+    background-color: rgb(40,40,50);
+}
+    #searchBtn:active {
+        box-shadow: 0 0 5px wheat;
+    }
+    #searchBtn:focus {
+        box-shadow: 0 0 5px wheat;
+    }
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(30,30,40);
+    background-image: linear-gradient(black,#5f5045);
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+}
+
+/* Side navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    outline: none;
+    font-size: 20px;
+    font-family: Helvetica,Arial, sans-serif;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+
+@media only screen and (max-width: 768px) {
+    #headerContainer {
+        height: 120px;
+    }
+
+    #headerDiv {
+        display: grid;
+        grid-template-columns: 60px 1fr;
+        grid-template-rows: 60px 60px;
+        grid-template-areas: " a c " " b d ";
+        align-items: center;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #burgerMenu {
+        grid-area: a;
+        width: 60px;
+    }
+
+    #userPanel {
+        grid-area: c;
+        margin-left: auto;
+        margin-right: 10px;
+        width: 220px;
+    }
+
+    #userNameStringDiv  {
+        margin-left:auto;
+    }
+
+    #createNutshellDiv {
+        grid-area: b;
+        margin-left: auto;
+    }
+
+    #searchForm {
+        grid-area: d;
+        margin-left: auto;
+        width: 220px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -19,7 +19,6 @@
     <Folder Include="Models\" />
     <Folder Include="Utilities\" />
     <Folder Include="ViewModels\" />
-    <Folder Include="wwwroot\Site\js\" />
   </ItemGroup>
 
 
