@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Exception";
+}
+
+
+<div class="media mt-4 border  border-secondary rounded-top rounded-lg pb-2 pt-3 pr-2 pl-3">
+    <div class="media-body">
+        <img class="float-left mr-3" src="~/Site/images/Errors/exclamation_mark_1.png" alt="error_img" height="128" width="128">
+        <h2 class="mt-2">Unexpected Error Occurred</h2>
+        <p class="mb-0">An error occured while processing your request. The support team is notified and we are working on the fix.</p>
+        <a href="mailto:some@email.com" target="_blank" class="btn btn-secondary btn-sm mt-3 float-right">Contact Us</a>
+    </div>
+</div>
+
+
+
+<h3>Exception Details:</h3>
+<div class="alert alert-danger">
+    <h5>Exception Path</h5>
+    <hr />
+    <p>@ViewBag.ExceptionPath</p>
+</div>
+
+<div class="alert alert-danger">
+    <h5>Exception Message</h5>
+    <hr />
+    <p>@ViewBag.ExceptionMessage</p>
+</div>
+
+<div class="alert alert-danger">
+    <h5>Exception Stack Trace</h5>
+    <hr />
+    <p>@ViewBag.StackTrace</p>
+</div>
+

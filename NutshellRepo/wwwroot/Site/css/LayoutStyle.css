@@ -1,0 +1,51 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: rgb(60,50,60);
+    color: wheat;
+}
+/*This will push footer to botom of screen*/
+#wholePageDiv {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#bodyDiv {
+    flex: 1;
+}
+
+
+
+
+
+
+
+
+
+/*Footer*/
+.borderLeft {
+    border-left: 2px solid black;
+}
+
+@media only screen and (max-width:767px) {
+    .borderLeft {
+        border: none;
+    }
+}
+
+.footer-links {
+    margin-top: 10px;
+    box-shadow: 0 0 10px black;
+    background-color: rgb(40, 40, 50);
+}
+
+.footer-copyright {
+    background-color: #847265;
+    text-align: center;    
+    height: 100%;
+    overflow: hidden;
+    margin-top: 0px;    
+    box-shadow: 0 -5px 10px black;
+}
