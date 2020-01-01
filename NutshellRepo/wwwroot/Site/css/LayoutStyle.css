@@ -4,6 +4,10 @@
     box-sizing: border-box;
     background-color: rgb(60,50,60);
     color: wheat;
+    background-image: url("/Site/images/logoTransparent.svg");    
+    background-position: center;    
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 /*This will push footer to botom of screen*/
 #wholePageDiv {
@@ -75,15 +79,13 @@
     /*display:none;*/ /*check if is logged in*/
 }
 
-#avatarThumbnail{
-    
-}
 
 #userThumb {
-    border-radius: 25%;
-    border: 2px solid rgb(40,40,50);
-    box-shadow: -3px 3px 5px black;    
+    border-radius: 2px;
+    border: 2px solid rgba(0,0,0,0.3);        
 }
+
+
 
 #userNameStringDiv {
     margin-top: 9px;
@@ -91,6 +93,7 @@
     max-width: 150px;
     overflow: hidden;
 }
+
 
 #userNameString {
     margin-left: 5px;
@@ -111,6 +114,7 @@
     color: rgb(160,160,170);
     /*color:wheat;*/ /*this will be needed when cheking for unread messages*/
     text-decoration: none;
+    outline:none;
     transition: 0.3s;
 }
     #envelope:hover {
@@ -132,6 +136,7 @@
     border-radius: 0px 0px 10px 10px;
     transition: 0.2s;
     margin-top:-10px;
+    cursor:pointer;
     
 }
 
@@ -158,6 +163,7 @@
 #searchField {
     background-color: wheat;
     border: 2px solid rgb(40,40,50);
+    border-right:none;
     border-radius: 5px 0px 0px 5px;
 }
 #searchField:focus {    
@@ -302,4 +308,9 @@
     overflow: hidden;
     margin-top: 0px;    
     box-shadow: 0 -5px 10px black;
+}
+
+
+TextTab {
+    margin-left:30px;
 }
