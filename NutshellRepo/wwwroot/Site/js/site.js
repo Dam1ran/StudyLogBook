@@ -78,12 +78,6 @@ function closeNav() {
     
 } 
 
-//function closeWelcome() {    
-//    document.getElementById("head").style.display = "none";
-//} 
-
-
-
 function empty() {
 
     if ($.trim($("#searchField").val()) === "" || $.trim($("#searchField").val()).length < 2) {
@@ -94,19 +88,6 @@ function empty() {
     };
 }
 
-
-
-
-
-
-/*
-function openLoginDiv(){
-    document.getElementsByClassName("loginDiv")[0].style.display = "block";
-}
-
-
-
-*/
 
 
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NutshellRepo.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,9 @@ namespace NutshellRepo.Data.DB
         {
 
         }
+
+        public DbSet<Member> Members { get; set; }
+
+
     }
 }

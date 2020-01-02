@@ -16,8 +16,7 @@ namespace NutshellRepo.Controllers
         public IActionResult Nutshell(string search)
         {
             ViewBag.text1 = search;
-            return View("NotImplemented");
-            
+            return View("NotImplemented");            
         }
 
     }

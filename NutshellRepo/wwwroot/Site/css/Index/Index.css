@@ -1,7 +1,10 @@
 ﻿#welcomeDiv{
    background-color:rgb(10,10,30);
    box-shadow: 0 0 10px black;   
-   margin-top:25px;   
+   margin-top:25px; 
+   
+/*temp*/
+   /*display:none;*/
 }
 
 #mainWelcomeDiv{
@@ -120,6 +123,111 @@
     #stripeDiv {
         margin-right: 0px;
         padding-right: 10px;
+    }
+}
+
+
+
+
+
+
+
+#motoDiv {
+    display: grid;
+    grid-template-columns: auto 30px;
+    background-image: url("/Site/images/logoTransparent.svg"),url("/Site/images/Index/diagHighlightBig.svg");    
+    background-color: rgb(10,10,30);
+    background-position: left,right;
+    background-repeat: no-repeat,no-repeat;    
+    background-size: 250px,cover;
+    height: 320px;
+    padding-right: 0;
+    margin-top: 15px;
+    box-shadow: 0 -2px 5px whitesmoke;
+    border-radius: 50px 0 0 0;
+}
+
+
+
+#motoWordsDiv {
+    grid-column: 1/2;
+}
+
+
+#learn {       
+    width:90%;
+    margin-left:5%;
+    margin-right:auto;
+}
+
+#concise {
+    width: 90%;
+    text-align:center;
+}
+
+#revise {
+    width: 90%;
+    margin-left: auto;
+    text-align: right;
+    margin-right: 10%;
+}
+
+.motoWords {
+    line-height: 75px;
+    height: 83px;
+    transition: 0.5s;
+    color: #52b8c8;
+    font-size: 42px;
+    text-shadow: -10px -10px 5px #4c686c;
+    font-weight: bold;
+    letter-spacing: 10px;
+    font-family: 'Roboto', sans-serif;
+    cursor: default;
+}
+
+    .motoWords:hover {        
+        text-shadow: -10px -10px 5px white;
+    }
+
+#siteNameString {
+    grid-column: 2/3;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    padding-top: 7px;
+    margin-bottom: auto;
+    margin-right: 10px;
+    margin-left: auto;
+    position: relative;
+    color: rgb(255, 153, 0);
+    color: rgb(60,60,70);
+    font-size: 26px;
+    line-height: 27px;
+    width: 30px;
+    height: 250px;
+    text-shadow: 0 0 2px black;
+    letter-spacing: 1.5px;
+    font-family: 'Roboto', sans-serif;
+    cursor: default;
+    transition:color 0.3s;
+}
+
+
+#motoFooter{
+    display:inline;
+    width:auto;
+    height:70px;    
+    margin-left:-15px;
+    margin-right:-30px;
+    background-color:whitesmoke;    
+}
+
+
+
+@media only screen and (max-width:768px) {
+
+    .motoWords {
+        font-size: 36px;
+        text-shadow: none;
     }
 
 }

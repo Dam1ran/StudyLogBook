@@ -4,10 +4,10 @@
     box-sizing: border-box;
     background-color: rgb(60,50,60);
     color: wheat;
-    background-image: url("/Site/images/logoTransparent.svg");    
+    /*background-image: url("/Site/images/logoTransparent.svg");    
     background-position: center;    
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: 100% 100%;*/
 }
 /*This will push footer to botom of screen*/
 #wholePageDiv {
@@ -88,7 +88,7 @@
 
 
 #userNameStringDiv {
-    margin-top: 9px;
+    margin-top: 4px;
     width: auto;
     max-width: 150px;
     overflow: hidden;
@@ -289,7 +289,7 @@
     border-left: 2px solid black;
 }
 
-@media only screen and (max-width:767px) {
+@media only screen and (max-width:768px) {
     .borderLeft {
         border: none;
     }

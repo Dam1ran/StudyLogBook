@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NutshellRepo.Data.DB;
+using NutshellRepo.Models;
 
 namespace NutshellRepo
 {
@@ -29,7 +30,7 @@ namespace NutshellRepo
             services.AddDbContextPool<StudyLogBookDbContext>(option => 
                      option.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
 
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<StudyLogBookDbContext>();
+            services.AddIdentity<Member, IdentityRole>().AddEntityFrameworkStores<StudyLogBookDbContext>();
 
             services.AddMvc();
         }
