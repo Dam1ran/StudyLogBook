@@ -5,8 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20191231130657_inilMigrtion.cs" />
-    <Compile Remove="Migrations\20191231130657_inilMigrtion.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200102133500_Initial.cs" />
+    <Compile Remove="Data\Migrations\20200102133500_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200103003612_initial.cs" />
+    <Compile Remove="Migrations\20200103003612_initial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,9 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\Migrations\" />
     <Folder Include="Migrations\" />
     <Folder Include="Utilities\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 

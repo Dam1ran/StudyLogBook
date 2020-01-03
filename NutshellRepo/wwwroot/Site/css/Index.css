@@ -13,20 +13,25 @@
    text-align:center;
 }
 
+#mainParagraph {
+    cursor: default;
+}
+
 #stripeDiv {
-    display:flex;
-    background-color: rgb(255, 153, 0);    
+    display: flex;
+    background-color: rgb(255, 153, 0);
     height: 30px;
     line-height: 30px;
     margin-left: 0;
     margin-right: -30px;
-    padding-right:40px;
+    padding-right: 40px;
     font-family: Verdana, Tahoma, sans-serif;
     font-size: 14px;
     font-weight: 900;
     text-decoration: none;
     color: rgb(10,10,30);
-    text-shadow: 0 0 10px black;    
+    text-shadow: 0 0 10px black;
+    cursor: default;
 }
 
 #closeWlecomeDiv {
@@ -55,13 +60,14 @@
     text-align: center;
     color: #17a2b8;
     text-shadow: 0 0 10px cadetblue;
-
+    cursor: default;
 }
 #welcomeText {
-    text-align:center;
+    text-align: center;
     color: silver;
     margin-left: 10px;
     margin-right: 10px;
+    cursor: default;
 }
 
 #yellowLine {
@@ -80,10 +86,7 @@
     margin-right: 30%;
 }
 
-.btns{
-    width:100px;
-    margin-bottom:5px;    
-}
+
 
 
 #bigArrow {
@@ -104,18 +107,7 @@
     margin-right:0;
 }
 
-.btns {
-    
-    clip-path: polygon(20% 0, 100% 0, 100% 20%, 80% 100%, 0 100%, 0 80%);
-    border-radius:0;
-    font-style:italic;
-    letter-spacing:1px;    
-}
 
-.btns:focus {
-    border: none;
-    box-shadow: 0 0 5px rgb(255, 153, 0);
-}
 
 
 @media only screen and (max-width:558px) {

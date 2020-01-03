@@ -19,7 +19,7 @@ namespace NutshellRepo
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            Configuration = configuration;            
         }
 
         public IConfiguration Configuration { get; }
@@ -30,7 +30,14 @@ namespace NutshellRepo
             services.AddDbContextPool<StudyLogBookDbContext>(option => 
                      option.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
 
-            services.AddIdentity<Member, IdentityRole>().AddEntityFrameworkStores<StudyLogBookDbContext>();
+            services.AddIdentity<Member, IdentityRole>()
+                    .AddEntityFrameworkStores<StudyLogBookDbContext>();
+
+            //services.Configure<IdentityOptions>(options => 
+            //{
+            //    options.SignIn.RequireConfirmedEmail = true;
+            //    options.User.RequireUniqueEmail = true;
+            //});
 
             services.AddMvc();
         }
@@ -55,8 +62,8 @@ namespace NutshellRepo
 
             app.UseRouting();
 
-            //app.UseAuthentication();
-            
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -1,0 +1,68 @@
+﻿
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-evenly;
+    margin: 0 auto;
+    margin-top:20px;  
+    height:auto;
+}
+
+
+#registrationText {
+    width: 400px;
+    text-shadow: -2px -2px 3px black;
+    margin: 0 10px 10px 10px;
+}
+
+
+#registerDiv {
+    width: 400px;
+    background-color: rgb(40,40,50);
+    background-image: url("/Site/images/logoTransparent.svg");    
+    background-position: top;
+    background-repeat: no-repeat;    
+    color: whitesmoke;
+    box-shadow: 0 0 3px whitesmoke;
+    height:100%;
+    padding-top:17px;
+}
+
+#registerFormValidationText {    
+    width: 100%;
+}
+
+#mailPrereq{
+    color:grey;
+    font-size:12px;
+}
+
+
+.myInputGroup {
+    height: auto;
+    width: 240px;
+    margin: 20px auto;
+}
+
+#registerBtn {
+    display: block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;    
+    letter-spacing: 1px;
+    width: 100%;
+    border-radius: 0;
+    padding: 10px 0px;    
+}
+
+#registerBtn:active {
+    box-shadow:none;
+}
+
+.myInputField {
+    background-color: whitesmoke;
+    border: 2px solid #17a2b8;    
+    
+}
+
