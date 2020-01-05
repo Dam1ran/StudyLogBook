@@ -11,7 +11,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NutshellRepo.Data.DB;
+using NutshellRepo.Data.Security;
 using NutshellRepo.Models;
+using NutshellRepo.Utilities.Email.Data.Implementations;
+using NutshellRepo.Utilities.Email.HTMLTemplates;
 
 namespace NutshellRepo
 {
@@ -23,7 +26,6 @@ namespace NutshellRepo
         }
 
         public IConfiguration Configuration { get; }
-
         
         public void ConfigureServices(IServiceCollection services)
         {
@@ -31,20 +33,31 @@ namespace NutshellRepo
                      option.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
 
             services.AddIdentity<Member, IdentityRole>()
-                    .AddEntityFrameworkStores<StudyLogBookDbContext>();
+                    .AddEntityFrameworkStores<StudyLogBookDbContext>()
+                    .AddDefaultTokenProviders();
 
-            //services.Configure<IdentityOptions>(options => 
-            //{
-            //    options.SignIn.RequireConfirmedEmail = true;
-            //    options.User.RequireUniqueEmail = true;
-            //});
+            services.Configure<IdentityOptions>(options =>
+            {                
+                options.SignIn.RequireConfirmedEmail = true;
+                options.User.RequireUniqueEmail = true;
+            });
+
+            services.Configure<DataProtectionTokenProviderOptions>(options => 
+                     options.TokenLifespan = TimeSpan.FromHours(1));
+
+            services.AddSendGridEmailSender();
+
+            services.AddTemplatedEmailSender();
+
+            services.AddSingleton<DataProtectionPurposeStrings>();
 
             services.AddMvc();
         }
 
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
+        {           
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -72,6 +85,8 @@ namespace NutshellRepo
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+           
         }
     }
 }

@@ -11,6 +11,7 @@ namespace NutshellRepo.Controllers
         public IActionResult Exception()
         {
             var exceptionDetails = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+
             if (exceptionDetails!=null)
             {
                 //log it then send something friendly

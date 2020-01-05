@@ -1,7 +1,6 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace NutshellRepo.ViewModels
+namespace NutshellRepo.ViewModels.Account
 {
     public class AccountRegisterViewModel
     {

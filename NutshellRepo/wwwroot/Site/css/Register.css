@@ -66,3 +66,18 @@
     
 }
 
+/*============email confirmation page======*/
+.confirmationText{
+    text-align:center;
+}
+
+.homePageBtn {
+    width: 200px;
+}
+
+#thankEmailDiv {
+    background-color: rgb(40,40,50);
+    background-image: url("/Site/images/logoTransparentHappySmile.svg");
+    background-position: left;
+    background-repeat: no-repeat;
+}

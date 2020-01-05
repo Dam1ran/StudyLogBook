@@ -327,8 +327,4 @@ TextTab {
     margin-bottom: 5px;
 }
 
-    .btns:focus {
-        border: none;
-        box-shadow: 0 0 5px rgb(255, 153, 0);
-    }
 

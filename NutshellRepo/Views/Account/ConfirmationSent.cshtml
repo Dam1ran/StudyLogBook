@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Confirmation";
+}
+
+<div class="mt-4 border border-secondary rounded-top rounded-lg p-2 pb-0">
+
+    <div class="confirmationText">
+        <br />
+        <h2>A message was sent to specified address!</h2>
+        <br />
+        <h3> Follow the link provided in order to confirm your email </h3>
+
+        <br />
+        In some cases it may take several minutes before a message reaches the destination. Also check your spam folder.
+        <br/>
+        <br />You Make this resource beloved by the day!
+        <br /><br/>
+        <a asp-controller="home" asp-action="index" class="btn btn-info btns homePageBtn">Home Page</a>
+    </div>
+
+</div>
+
+@section Scripts
+{    
+    <link href="~/Site/css/Register.css" rel="stylesheet" />
+
+}

@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Email Not Confirmed";
+}
+
+<div class="mt-4 border border-secondary rounded-top rounded-lg p-2 pb-0">
+
+    <div class="confirmationText">
+        <br />
+        <h3>Email was not confirmed</h3>
+        <br />
+        <div class="text-danger text-center">@Model</div>
+        <br /><br />
+        <a asp-controller="home" asp-action="index" class="btn btn-info btns homePageBtn">Home Page</a>
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <link href="~/Site/css/Register.css" rel="stylesheet" />
+
+}

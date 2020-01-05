@@ -7,8 +7,10 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\20200102133500_Initial.cs" />
     <Compile Remove="Data\Migrations\20200102133500_Initial.Designer.cs" />
-    <Compile Remove="Migrations\20200103003612_initial.cs" />
-    <Compile Remove="Migrations\20200103003612_initial.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Utilities\Email\HTMLTemplates\ConfirmEmail.html" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,12 +23,11 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
+    <PackageReference Include="Sendgrid" Version="9.12.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Migrations\" />
-    <Folder Include="Migrations\" />
-    <Folder Include="Utilities\" />
+    <EmbeddedResource Include="Utilities\Email\HTMLTemplates\ConfirmEmail.html" />
   </ItemGroup>
 
 

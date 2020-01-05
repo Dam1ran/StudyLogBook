@@ -1,0 +1,38 @@
+﻿@model NutshellRepo.Utilities.Email.Data.Implementations.SendEmailResponse
+
+@{
+    ViewData["Title"] = "Email Error";
+}
+
+<div class="mt-4 border border-secondary rounded-top rounded-lg p-2 pb-0">
+
+    <div class="confirmationText">
+        <br />
+        <h3>An error was occured while trying to send the email.</h3>
+        <br />
+        <h4 class="text-left text-info"> Error emerged due to following: </h4>
+              
+
+        <ul>
+            @foreach (var error in Model.Errors)
+            {
+                <li class="text-danger"><div class="text-danger text-left">@error</div></li>
+
+            }
+        </ul>
+        
+        <br />The support team is notified and we are working on the fix.
+
+        <br /><br />
+        You Make this resource beloved by the day!
+        <br /><br />
+        <a asp-controller="home" asp-action="index" class="btn btn-info btns homePageBtn">Home Page</a>
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <link href="~/Site/css/Register.css" rel="stylesheet" />
+
+}
