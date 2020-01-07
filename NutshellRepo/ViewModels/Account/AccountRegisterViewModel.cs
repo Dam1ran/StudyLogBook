@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace NutshellRepo.ViewModels.Account
 {
@@ -8,6 +9,7 @@ namespace NutshellRepo.ViewModels.Account
         [MinLength(3, ErrorMessage = "Name cannot be less than 3 characters.")]
         [MaxLength(50, ErrorMessage = "User Name cannot be greater than 50 characters.")]
         [Display(Name = "User Name:")]
+        [Remote(action: "IsUserNameTaken",controller: "Account")]
         public string UserName { get; set; }
 
         [Required]

@@ -11,7 +11,7 @@
         <h3>An error was occured while trying to send the email.</h3>
         <br />
         <h4 class="text-left text-info"> Error emerged due to following: </h4>
-              
+
 
         <ul>
             @foreach (var error in Model.Errors)
@@ -20,13 +20,13 @@
 
             }
         </ul>
-        
+
         <br />The support team is notified and we are working on the fix.
 
         <br /><br />
-        You Make this resource beloved by the day!
-        <br /><br />
-        <a asp-controller="home" asp-action="index" class="btn btn-info btns homePageBtn">Home Page</a>
+        <div class="text-center">You Make this resource beloved by the day!</div>
+        <br/>
+        <a asp-controller="home" asp-action="index" class="btn btn-info btns homePageBtn" id="homeBtn">Home Page</a>
     </div>
 
 </div>
@@ -34,5 +34,12 @@
 @section Scripts
 {
     <link href="~/Site/css/Register.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setTimeout(function () {
+                document.getElementById("homeBtn").click();
+            }, 10000);
+        });
+    </script>
 
 }

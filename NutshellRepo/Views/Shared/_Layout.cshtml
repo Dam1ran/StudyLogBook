@@ -29,13 +29,21 @@
                         <img src="~/Site/images/defaultAvatar.svg" alt="user_img" height="42" width="42" id="userThumb" />
                     </div>
 
-                    <div id="userNameStringDiv">
-                        <a href="#" id="userNameString" title="Profile">pupsiK</a>
+                    <div id="userPanelWrapper">
 
-                    </div>
+                        <div id="userAndMsgs">
 
-                    <div id="messagesDiv">
-                        <a href="#" class="fas fa-envelope fa-1x" id="envelope" title="New Messages: 32//get from server"></a>
+                            <div id="userNameStringDiv">
+                                <a href="#" id="userNameString" title="Profile">pupsiK</a>
+                            </div>
+
+
+                            <a href="#" class="fas fa-envelope fa-1x" id="envelope" title="New Messages: 32//get from server"></a>
+
+                        </div>
+
+                        <a href="#" id="logInOut">Logout</a>                        
+                        
                     </div>
 
                 </div>
@@ -63,7 +71,7 @@
 
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" title="Close">&times;</a>
             <a asp-controller="Home" asp-action="Index">Home</a>
-            <a href="#" id="loginA" onclick="openLoginDiv()">Login</a>
+            <a asp-controller="account" asp-action="Login" id="loginA">SignIn</a>
             <a asp-controller="account" asp-action="register">Register</a>
             <a href="#">Contacts</a>
             <a href="#">About</a>

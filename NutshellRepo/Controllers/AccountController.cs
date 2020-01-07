@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -38,61 +37,33 @@ namespace NutshellRepo.Controllers
         }
         #endregion
 
-        [HttpGet]
+        #region Username Remote Validation
+
+        [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId, string token)
-        {           
+        public async Task<IActionResult> IsUserNameTaken(string userName)
+        {
+            var user = await _MemberManager.FindByNameAsync(userName);
 
-            if (userId == null || token == null)
+            if (user == null)
             {
-                return RedirectToAction("index","home");
+                return Json(true);
             }
-
-            string decUserId;
-
-            try
+            else
             {
-                decUserId = _dataProtector.Unprotect(userId);
-            }
-            catch (Exception)
-            {
-                return View("FailToConfirmEmail", "Wrong Confirmation.");
-            }
-            
-
-            var user = await _MemberManager.FindByIdAsync(decUserId);
-
-            if (user==null)
-            {
-                return View("FailToConfirmEmail", "Cannot find specified user.");
+                return Json($"User Name: {userName} is already in use");
             }
 
-            var isAlreadyConfirmed = await _MemberManager.IsEmailConfirmedAsync(user);
-
-            if (isAlreadyConfirmed)
-            {
-                return View("AlreadyConfirmed");
-            }
-
-            var result = await _MemberManager.ConfirmEmailAsync(user,token);
-
-            if (result.Succeeded)
-            {                
-                return View();
-            }
-
-            return View("FailToConfirmEmail", result); 
         }
 
+        #endregion
 
-
-        [HttpGet]        
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
-        }
-
+        }        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -109,7 +80,7 @@ namespace NutshellRepo.Controllers
                 }
                 catch (Exception ex)
                 {
-                    //log ex
+                    //TODO log - cant reach DB
                     var ziu = ex;
 
                     ViewBag.ExceptionPath = "account/register";
@@ -123,7 +94,7 @@ namespace NutshellRepo.Controllers
 
                 if (member != null)
                 {
-                    ModelState.AddModelError("", "User Name already taken.");
+                    ModelState.AddModelError("", $"User Name {aAccountRegisterViewModel.UserName} already taken.");
                     return View();
                 }
                 else
@@ -179,6 +150,61 @@ namespace NutshellRepo.Controllers
 
             return View(aAccountRegisterViewModel);
         }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+
+            if (userId == null || token == null)
+            {
+                return RedirectToAction("index", "home");
+            }
+
+            string decUserId;
+
+            try
+            {
+                decUserId = _dataProtector.Unprotect(userId);
+            }
+            catch (Exception)
+            {
+                return View("FailToConfirmEmail", "Wrong Confirmation.");
+            }
+
+
+            var user = await _MemberManager.FindByIdAsync(decUserId);
+
+            if (user == null)
+            {
+                return View("FailToConfirmEmail", "Cannot find specified user.");
+            }
+
+            var isAlreadyConfirmed = await _MemberManager.IsEmailConfirmedAsync(user);
+
+            if (isAlreadyConfirmed)
+            {
+                return View("AlreadyConfirmed");
+            }
+
+            var result = await _MemberManager.ConfirmEmailAsync(user, token);
+
+            if (result.Succeeded)
+            {
+                return View();
+            }
+
+            return View("FailToConfirmEmail", result);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult LogIn()
+        {            
+            return View();
+        }
+
 
     }
 }

@@ -1,10 +1,7 @@
 ﻿#welcomeDiv{
    background-color:rgb(10,10,30);
    box-shadow: 0 0 10px black;   
-   margin-top:25px; 
-   
-/*temp*/
-   /*display:none;*/
+   margin-top:25px;   
 }
 
 #mainWelcomeDiv{

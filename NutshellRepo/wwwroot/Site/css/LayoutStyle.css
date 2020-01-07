@@ -28,7 +28,7 @@
     background-color: #847265;
     border-bottom: 2px solid black;
     height: 60px;
-    box-shadow: 0 5px 5px black;
+    box-shadow: 0 5px 5px black;    
 }
 
 
@@ -85,36 +85,45 @@
     border: 2px solid rgba(0,0,0,0.3);        
 }
 
+#userAndMsgs {
+    display: block !important;
+    height: 21px;
+    width: 178px;
+}
 
+#userPanelWrapper {    
+    height: 21px;
+}
 
-#userNameStringDiv {
-    margin-top: 4px;
-    width: auto;
+#userNameStringDiv {    
+    display:inline-block;
+    height:21px;
+    padding-bottom:5px;
     max-width: 150px;
     overflow: hidden;
 }
 
 
-#userNameString {
+#userNameString {    
     margin-left: 5px;
     margin-right: 5px;    
-    align-items: center;    
-    font-size: 14px;
+    font-size: 16px;
     text-shadow: 0px 0px 5px black;
     text-decoration: underline;
     color: wheat;
-    font-family: apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";   
+    font-family: apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
 }
 
-#messagesDiv {
-    margin-right: 7px;
-}
+
 
 #envelope {
-    color: rgb(160,160,170);
+    position:relative;
+    top:-10px;
+    display: inline-block;
+    color: rgb(160,160,170);    
     /*color:wheat;*/ /*this will be needed when cheking for unread messages*/
     text-decoration: none;
-    outline:none;
+    outline: none;
     transition: 0.3s;
 }
     #envelope:hover {
@@ -122,11 +131,34 @@
         transform: scale(1.1);
     }
 
-    #envelope:active {
-        transform: scale(1.1);
-        margin-top: 6px;
+    #envelope:active {        
         text-shadow: none;
         color: rgba(0,0,0,0.4);
+    }
+
+
+#logInOut {    
+    display: block;
+    text-align:center;
+    width:120px;
+    height:20px;
+    margin: 8px 0 0 auto;
+    font-size:16px;
+    color: black;
+    line-height:1;
+    font-weight:600;
+    background-color: rgba(255,255,255,0.6);
+    text-decoration:none;
+    border-radius:5px 5px 0 0;
+    transition: all 0.3s;
+}
+
+    #logInOut:hover {
+        background-color: rgba(250,250,250,0.8);
+    }
+
+    #logInOut:active {
+        background-color: rgba(150,150,150,0.3);
     }
 
 #createNutshellDiv {
@@ -250,8 +282,9 @@
         width: 220px;
     }
 
-    #userNameStringDiv  {
-        margin-left:auto;
+    #envelope {
+        float:right;
+        top:-5px;
     }
 
     #createNutshellDiv {

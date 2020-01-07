@@ -4,8 +4,7 @@ using System;
 namespace NutshellRepo.Controllers
 {
     public class HomeController : Controller
-    {
-        //[ValidateAntiForgeryToken]
+    {       
         public IActionResult Index()
         {            
             return View();

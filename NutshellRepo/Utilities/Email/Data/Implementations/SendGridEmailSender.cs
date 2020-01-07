@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace NutshellRepo.Utilities.Email.Data.Implementations
 {
+
+    /// <summary>
+    /// Implementation of IEmailSender that uses SendGrid.
+    /// </summary>
     public class SendGridEmailSender : IEmailSender
     {
         public SendGridEmailSender(IConfiguration configuration)
@@ -17,7 +21,11 @@ namespace NutshellRepo.Utilities.Email.Data.Implementations
         }
 
         public IConfiguration Configuration { get; }
-
+        /// <summary>
+        /// Sends an email via SendGrid API.
+        /// </summary>
+        /// <param name="details"></param>
+        /// <returns>SendEmailResponse Object.</returns>
         public async Task<SendEmailResponse> SendEmailAsync(SendEmailDetails details)
         {
             var apiKey = Configuration["NutshellRepoSendGridKey"];

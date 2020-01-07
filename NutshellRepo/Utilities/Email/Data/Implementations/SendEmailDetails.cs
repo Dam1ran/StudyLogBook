@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 
 namespace NutshellRepo.Utilities.Email.Data.Implementations
 {
+
+    /// <summary>
+    /// Contains fields required to send an Email.
+    /// </summary>
     public class SendEmailDetails
     {
         public string FromName { get; set; }

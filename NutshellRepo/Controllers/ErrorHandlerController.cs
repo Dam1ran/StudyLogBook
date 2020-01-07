@@ -20,6 +20,7 @@ namespace NutshellRepo.Controllers
                 ViewBag.Stacktrace = exceptionDetails.Error.StackTrace;
                 return View("Exception");
             }
+            //TODO refine this page when loger will be injected
             //return RedirectToAction("Index", "Home");
             ViewBag.ExceptionPath = "No info";
             ViewBag.ExceptionMessage = "Undefined";

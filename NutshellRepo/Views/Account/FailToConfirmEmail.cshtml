@@ -10,7 +10,7 @@
         <br />
         <div class="text-danger text-center">@Model</div>
         <br /><br />
-        <a asp-controller="home" asp-action="index" class="btn btn-info btns homePageBtn">Home Page</a>
+        <a asp-controller="home" asp-action="index" class="btn btn-info btns homePageBtn" id="homeBtn">Home Page</a>
     </div>
 
 </div>
@@ -18,5 +18,12 @@
 @section Scripts
 {
     <link href="~/Site/css/Register.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setTimeout(function () {
+                document.getElementById("homeBtn").click();
+            }, 5000);
+        });
+    </script>
 
 }

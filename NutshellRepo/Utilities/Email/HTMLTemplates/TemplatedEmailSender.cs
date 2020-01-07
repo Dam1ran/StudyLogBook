@@ -41,7 +41,7 @@ namespace NutshellRepo.Utilities.Email.HTMLTemplates
                             IsHTML = true,
                             Content = templateText
                         });
-            
+
         }
     }
 }
