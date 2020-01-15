@@ -1,0 +1,82 @@
+﻿@*@model NutshellRepo.ViewModels.User.InboxPreviewMessagesViewModel*@
+@{
+    ViewData["Title"] = "Inbox";
+}
+
+
+<link href="~/Site/css/User.css" rel="stylesheet" />
+
+<div id="searchMessagesDiv">
+
+    <form >
+
+        <div class="input-group">
+            <input class="form-control py-2" name="Message" >
+            <div class="input-group-append">
+                <button class="btn btn-secondary btn-sm" type="submit">
+                    <i class="fa fa-search" id="magnifierUser"></i>
+                </button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+    <div class="divider"></div>
+
+    <div class="container_outer_profile">
+
+        <div class="container_inner_profile container_inner_profile_messages">
+
+            <form asp-action="ViewInbox" asp-controller="User" method="post">
+
+                <table class="table-bordered">
+                    <thead>
+                        <tr>
+                            <th>From:</th>
+                            <th>Subject:</th>
+                            <th>Message:</th>
+                            <th>Delete NAHUI:</th>
+                        </tr>
+                    </thead>
+                    @*<tbody>
+                        @foreach (var preview in Model.userPreviewMessages)
+                        {
+
+                            <tr>
+                                <td>
+                                    
+                                    @preview.userPreviewMessage.FromUser
+                                    
+                                
+                                
+                                </td>
+                                <td>@preview.userPreviewMessage.Subject</td>
+                                <td>@preview.userPreviewMessage.MessageBody</td>
+                                <td> <input type="checkbox" asp-for="@preview.isToDelete" /></td>
+                            </tr>
+
+                        }
+                    </tbody>*@
+                </table>
+
+                <div class="form-group">
+                    <input type="submit" value="DELETE" class="btn btn-primary"/>
+                </div>
+
+
+            </form>
+
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+

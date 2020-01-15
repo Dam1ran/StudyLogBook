@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using NutshellRepo.Models;
+@inject SignInManager<Member> _signInManager
+@inject UserManager<Member> _userManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,46 +26,56 @@
                     <div class="bar"></div>
                 </div>
 
-
                 <div id="userPanel">
 
-                    <div id="avatarThumbnail">
-                        <img src="~/Site/images/defaultAvatar.svg" alt="user_img" height="42" width="42" id="userThumb" />
-                    </div>
+                    @if (_signInManager.IsSignedIn(User))
+                    {
 
-                    <div id="userPanelWrapper">
-
-                        <div id="userAndMsgs">
-
-                            <div id="userNameStringDiv">
-                                <a href="#" id="userNameString" title="Profile">pupsiK</a>
-                            </div>
-
-
-                            <a href="#" class="fas fa-envelope fa-1x" id="envelope" title="New Messages: 32//get from server"></a>
-
+                        <div id="avatarThumbnail">
+                            <img src="~/Site/images/defaultAvatar.svg" alt="user_img" height="42" width="42" id="userThumb" />
                         </div>
 
-                        <a href="#" id="logInOut">Logout</a>                        
-                        
-                    </div>
+                        <div id="userPanelWrapper">
 
+                            <div id="userAndMsgs">
+
+                                <div id="userNameStringDiv">
+                                    <a asp-action="ViewProfile" asp-controller="User" asp-route-username="@User.Identity.Name" id="userNameString" title="View Profile">@User.Identity.Name</a>
+                                </div>
+                                <form asp-action="ViewInbox" asp-controller="User" method="post">
+                                    <button type="submit">
+                                        <i class="fas fa-envelope fa-1x" id="envelope" title="Messages"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <form asp-action="logout" asp-controller="account" method="post">
+                                <button type="submit" id="logInOut">Logout</button>
+                            </form>
+                        </div>
+                    }
                 </div>
 
                 <div id="createNutshellDiv">
-                    <img src="~/Site/images/nutButton.svg" alt="nut_img" height="48" width="48" id="nutThumb" title="Login to create a Nutshell/Create a Nutshell">
+                    @if (_signInManager.IsSignedIn(User))
+                    {
+                        <img src="~/Site/images/nutButton.svg" alt="nut_img" height="48" width="48" id="nutThumb" title="Create a Nutshell">
+                    }
+                    else
+                    {
+                        <img src="~/Site/images/nutButton.svg" alt="nut_img" height="48" width="48" id="nutThumb" title="Login to create a Nutshell" style="opacity: 0.4;">
+                    }
                 </div>
 
-                <form asp-controller="home" asp-action="nutshell" method="post" class="mr-2" id="searchForm">                    
+                <form asp-controller="home" asp-action="nutshell" method="post" class="mr-2" id="searchForm">
                     <div class="input-group">
                         <input class="form-control py-2" type="search" placeholder="Find a Nutshell" id="searchField" pattern=".{2,100}" title="2-100 characters range" name="search">
-                        <div class="input-group-append">                            
+                        <div class="input-group-append">
                             <button class="btn btn-secondary btn-sm" onClick="return empty()" type="submit" id="searchBtn">
                                 <i class="fa fa-search" id="mglass"></i>
                             </button>
                         </div>
                     </div>
-                </form>                
+                </form>
             </header>
 
         </div>
@@ -71,14 +85,63 @@
 
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" title="Close">&times;</a>
             <a asp-controller="Home" asp-action="Index">Home</a>
-            <a asp-controller="account" asp-action="Login" id="loginA">SignIn</a>
-            <a asp-controller="account" asp-action="register">Register</a>
+            @if (_signInManager.IsSignedIn(User))
+            {
+                <form asp-action="logout" asp-controller="account" method="post">
+                    <button type="submit" id="loginA">Logout</button>
+                </form>
+                
+            }
+            else
+            {
+                <a asp-controller="account" asp-action="Login" id="loginA" onclick="showLogin()">SignIn</a>
+
+                <a asp-controller="account" asp-action="register">Register</a>
+            }
+            
             <a href="#">Contacts</a>
             <a href="#">About</a>
 
         </div>
 
 
+        <div id="modalTintDiv">
+
+            <form asp-controller="account" asp-action="LogIn" method="post" id="loginDivModal" onsubmit="return validateLogIn()" class="needValidate loginDiv animate" novalidate>
+
+                <button type="button" class="close" onclick="closeLoginModal()" id="closeModalBtn">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <div class="form-group myInputGroup">
+                    <input name="Email" class="form-control" type="email" placeholder="Email" required />
+                    <div class="invalid-feedback" id="emailFeedback">
+                        Please enter a valid email address.
+                    </div>
+                </div>
+                <div class="form-group myInputGroup">
+                    <input name="Password" class="form-control" type="password" placeholder="Password" required />
+                    <div class="invalid-feedback" id="pwdFeedback">
+                        Please enter a valid password format.
+                    </div>
+                </div>
+
+                <div class="myInputGroup" id="checkBoxDiv">
+
+                    <input type="checkbox" value="true" for="rememberMe" name="RememberMe" id="checkbox" />
+
+                    <label id="checkLbl">
+                        <span id="rememberMe" title="Do Not use this option if you SignIn from a public/unsafe place.">Remember Me</span>
+                    </label>
+
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="SignIn" class="btn btn-primary" id="logInBtn" />
+                </div>
+            </form>
+
+        </div>
 
 
         <div class="container" id="bodyDiv">
@@ -107,28 +170,34 @@
 
                     <div class="col-md-3 mb-md-0 mb-3 borderLeft">
 
-                        <h5 class="text-uppercase mt-3">Navigation</h5>
+                        <h5 class="text-uppercase mt-3">Links</h5>
 
                         <ul class="list-unstyled">
                             <li>
-                                <a class="text-info" asp-area="" asp-controller="Home" asp-action="Index">Home Page</a>
+                                <a class="text-info" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
-                            <li>
-                                <a class="text-info" href="#!">Link 2</a>
-                            </li>
-                            <li>
-                                <a class="text-info" href="#!">Link 3</a>
-                            </li>
-                            <li>
-                                <a class="text-info" href="#!">Link 4</a>
-                            </li>
+
+                            @if (!_signInManager.IsSignedIn(User))
+                            {
+                                <li>
+                                    <a class="text-info" asp-controller="account" asp-action="login">Login</a>
+                                </li>
+                                <li>
+                                    <a class="text-info" asp-controller="account" asp-action="register">Register</a>
+                                </li>
+                            }
+
+                             <li>
+                                 <a class="text-info" href="#!">Link 4</a>
+                             </li>
+
                         </ul>
 
                     </div>
 
                     <div class="col-md-3 mb-md-0 mb-3 borderLeft">
 
-                        <h5 class="text-uppercase mt-3">Links</h5>
+                        <h5 class="text-uppercase mt-3">Navigation</h5>
 
                         <ul class="list-unstyled">
                             <li>

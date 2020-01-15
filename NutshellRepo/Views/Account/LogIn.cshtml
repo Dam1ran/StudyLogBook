@@ -6,7 +6,7 @@
 
 
 
-    <form asp-action="LogIn" id="loginDiv">
+    <form asp-action="LogIn" class="loginDiv">
         <div class="form-group myInputGroup">
             <label asp-for="Email" class="control-label"></label>
             <input asp-for="Email" class="form-control" />
@@ -22,8 +22,9 @@
 
         <div class="myInputGroup" id="checkBoxDiv">
 
-            <label for="checkbox" id="checkLbl">
-                <input type="checkbox" asp-for="RememberMe" id="checkbox" />
+            <input type="checkbox" asp-for="RememberMe" id="checkbox" />
+
+            <label id="checkLbl">
                 <span id="rememberMe" title="Do Not use this option if you SignIn from a public place.">@Html.DisplayNameFor(model => model.RememberMe)</span>
             </label>
 

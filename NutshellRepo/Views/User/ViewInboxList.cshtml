@@ -1,0 +1,113 @@
+﻿@model List<NutshellRepo.ViewModels.User.UserPreviewMessageViewModel>
+
+@{
+    ViewData["Title"] = "Inbox Messages";
+}
+<link href="~/Site/css/User.css" rel="stylesheet" />
+<div id="searchMessagesDiv">
+
+    <form asp-controller="user" asp-action="ViewInbox" method="post">
+        <div class="input-group">
+            <input class="form-control py-2" type="search">
+            <div class="input-group-append">
+                <button class="btn btn-secondary btn-sm" type="submit">
+                    <i class="fa fa-search" id="magnifierUser"></i>
+                </button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<div class="divider"></div>
+
+
+<div class="container_outer_messages">
+
+    <div class="container_inner_messages">
+        @if (Model.Count > 1)
+        {
+            <form asp-action="DeleteMessages" method="post">
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-secondary">
+                        <i class="far fa-trash-alt"></i>
+                        Delete
+                    </button>
+                </div>
+
+                <table class="table_striped">
+                    <thead>
+                        <tr class="tableRow">
+                            <th class="td_from">From:</th>
+                            <th class="td_subject">Subject:</th>
+                            <th class="td_message">Message</th>
+                            <th class="td_checkbox td_checkbox_all">
+                                <input type="checkbox" class="toDeleteCheckbox toDeleteCheckbox_biger" id="mainCheckbox" onclick="clickAll()" />
+                            </th>
+                            <th class="td_checkbox td_checkbox_readme"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @for (var i = 0; i < Model.Count; i++)
+                        {
+
+                            <tr class="tableRow">
+                                <td class="td_from">
+                                    @Model[i].FromUser
+                                    <input type="hidden" asp-for="@Model[i].FromUser" />
+
+                                </td>
+                                <td class="td_subject">
+                                    @Model[i].Subject
+                                    <input type="hidden" asp-for="@Model[i].Subject" />
+
+                                </td>
+                                <td class="td_message text-left">
+                                    @Model[i].MessageBody
+                                    <input type="hidden" asp-for="@Model[i].MessageBody" />
+                                </td>
+                                <td class="td_checkbox">
+
+                                    <input type="checkbox" asp-for="@Model[i].isToDelete" class="toDeleteCheckbox" title="Mark for delete" />
+
+                                    <input type="hidden" asp-for="@Model[i].Id" />
+                                </td>
+
+                                <td class="td_checkbox td_checkbox_readme">
+                                    <a asp-action="ReadMessage" asp-controller="User" asp-route-messageId="@Model[i].Id" title="Read Message">
+                                        <i class="fas fa-align-justify fa-2x"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </form>
+        }
+        else
+        {
+            <div class="nutshells_Div_Message_header">Inbox Empty</div>
+            
+            <a asp-controller="home" asp-action="index" class="btn btn-info btns user_homePageBtn">Home Page</a>
+        }
+
+    </div>
+
+</div>
+
+
+
+
+@section Scripts
+{
+    <script src="~/Site/js/user.js"></script>
+}
+
+

@@ -60,9 +60,15 @@ namespace NutshellRepo.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
-            return View();
+            var user = await _MemberManager.GetUserAsync(HttpContext.User);
+            if (user == null)
+            {
+                return View();
+            }
+            //already logged in
+            return RedirectToAction("index", "home");            
         }        
 
         [HttpPost]
@@ -200,10 +206,62 @@ namespace NutshellRepo.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult LogIn()
+        public async Task<IActionResult> LogIn()
         {            
-            return View();
+            var user = await _MemberManager.GetUserAsync(HttpContext.User);
+            if (user==null)
+            {
+                return View();
+            }
+            //already logged in
+            return RedirectToAction("index", "home");
         }
+
+        
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogIn(LogInViewModel logInViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _MemberManager.FindByEmailAsync(logInViewModel.Email);
+
+                if (user!=null)
+                {
+                    var result = await _SignInManager.PasswordSignInAsync(user, logInViewModel.Password, logInViewModel.RememberMe, false);
+
+                    if (result.Succeeded)
+                    {                        
+                        return RedirectToAction("index", "home");
+                    }
+                                            
+                }
+
+                ModelState.AddModelError("", "Invalid Login Attempt");                            
+
+            }            
+
+            return View(logInViewModel);
+
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> TestPage()
+        {            
+            //return await Task.Run(()=>Content("Test Page"));
+            return await Task.Run(()=>View("../User/ViewProfile"));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {            
+            await _SignInManager.SignOutAsync();
+            return RedirectToAction("index", "home");
+        }
+
 
 
     }

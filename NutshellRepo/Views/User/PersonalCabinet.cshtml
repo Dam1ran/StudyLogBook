@@ -1,0 +1,99 @@
+﻿@model NutshellRepo.Models.Member
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+
+@{
+    ViewData["UserName"] = @Model.UserName;
+}
+
+
+
+
+
+<partial name="_FindUserPartial.cshtml">
+       
+<div class="divider"></div>
+
+<div class="container_outer_profile">
+
+    <div class="container_inner_profile">
+
+        <div class="container_inner_profile_div">
+
+            <div class="profile_status">@Model.ProfileStatus</div>
+
+            <img src="~/Site/images/Users/nut.jpg" alt="profile_picture" width="120" height="120" />
+
+            <div class="container_inner_profile_desciprion">
+
+                <div class="username_strings">@Model.UserName</div>
+
+                <div class="username_strings">Nutshells: @Model.Nutshells</div>
+
+                <div class="username_strings">Appreciations: @Model.AppreciatiationPoints</div>
+
+                <div class="username_registered_on">Registered on:<p>@Model.RegisteredOn.ToString("dd MMMM yyyy")</p></div>
+
+            </div>
+
+        </div>
+
+        <div class="container_inner_profile_buttons">
+
+
+            <form asp-action="ViewInbox" asp-controller="User" method="post">
+                <button class="btn btn-secondary profile_button" type="submit">
+                    <i class="fas fa-envelope fa-1x mr-3"></i>Messages Inbox
+                </button>
+
+            </form>
+
+            <form asp-action="ProfileSettings" asp-controller="User" method="post">
+
+                <button class="btn btn-secondary profile_button" type="submit">
+                    <i class="fas fa-tasks fa-1x mr-3"></i>Profile Settings
+                </button>
+
+            </form>
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <div class="nutshells_Div_profile">
+
+        <div class="nutshells_Div_profile_header">Nutshells:</div>
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+@*@section Scripts
+    {
+        <script>
+            function startRefresh() {
+                $.get('', function (data) {
+                    $(document.body).html(data);
+                });
+            }
+
+
+            $(function () {
+                setTimeout(startRefresh, 5000);
+            });
+        </script>
+    }*@

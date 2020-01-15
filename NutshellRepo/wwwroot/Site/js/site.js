@@ -1,41 +1,117 @@
-jQuery(document).ready(function(){          
+$(document).ready(function () {
 
-   
-    
-    var headText = "\"Learn, Concise, Revise!\"";
-    var headTextLenght = headText.length;
-    var headTextIndex  = 0;
-    var headTextAppend = "";  
-    delay = 50;
-   
-    for (let i = 0; i < headTextLenght; i++) {
-       setTimeout( textAppender, delay * i);
-    }
-       
-    function textAppender(){
+    document.getElementById("loginA").href = "javascript:void(0)";
 
-        headTextAppend+=headText[headTextIndex];
-        headTextIndex++;
-        $(".bigText").text(headTextAppend);
+    if (document.getElementById("userNameString") != null) {
+
+        $.ajax({
+
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: document.getElementById("userNameString").innerHTML,
+            url: "/user/MessagesCount",
+            success: function (data)
+            {
+                let result = jQuery.parseJSON(data.result);                              
+
+                if (result > 0) {
+                    let envelope = document.getElementById("envelope");
+
+                    envelope.title = `${result} New Message${(result > 1) ? "s" : ""}`;
+                    envelope.style.color = "wheat";
+                }
+                else
+                {
+                    envelope.title = "No New Messages";
+                    envelope.style.color = "rgb(160,160,170)";
+                }
+                
+            }        
+
+        });
         
     }
-
-    //setTimeout(closeWelcome,10000);
-
-
    
-    
-    //document.body.innerHTML += '<div class="grid-container"> <div class="grid-item" id="likes">Likes</div><div class="grid-item" id="author">Author</div><div class="grid-item" id="subject">Subjects</div><div class="grid-item" id="compartment">Compartment</div></div>';
-
-    // document.getElementById("Nauthor").innerHTML = "My new text!";
 
 
-    //loadMore();
-
-
-
-    
+    //alert(document.getElementById("userNameString").innerHTML);
 });
+
+
+
+
+
+
+//$(document).ready(function () {          
+
+
+//    document.getElementById("loginA").setAttribute('href','javascript:void(0)');
+
+//    //if (document.getElementById("userNameString").val() != null)
+//    //{
+//    //}
+
+//    alert(document.getElementById("userNameString").val());
+
+//    alert("sukanahui");
+//    //$.ajax({
+//    //    url: @Url.Action("MessagesCount","account");
+
+//    //});
+    
+//});
+
+
+
+
+function showLogin() {
+
+    document.getElementById("modalTintDiv").style.display = "block";
+    $('div.form-group > input:first').focus();
+
+}
+
+function closeLoginModal(){
+    
+    document.getElementById("modalTintDiv").style.display = "none";
+
+}
+
+function validateLogIn() {
+
+    var emailString = document.forms["loginDivModal"]["Email"].value;
+
+    var emailRegEx = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+    var emailState = emailRegEx.test(emailString);
+
+    var result = true;
+
+    if (document.forms["loginDivModal"]["Password"].value.length < 6)
+    {
+        document.getElementById("pwdFeedback").style.display = "block";
+
+        result = false;
+    }
+    else
+    {
+        document.getElementById("pwdFeedback").style.display = "none";
+    }
+
+    if (emailState == false)
+    {            
+        document.getElementById("emailFeedback").style.display = "block";
+        
+        result = false;
+    }
+    else {
+
+        document.getElementById("emailFeedback").style.display = "none";
+    }
+
+    return result;
+
+}
 
 
 
@@ -52,14 +128,15 @@ window.onclick = function (event) {
     {
         closeNav();
     }
+
+    if (event.target == document.getElementById("modalTintDiv")) {
+        document.getElementById("modalTintDiv").style.display = "none";
+    }
+
 }
 
 
-
-
-function openNav() {
-
-    
+function openNav() {        
 
     if (document.getElementById("mySidenav").style.width == 0 || document.getElementById("mySidenav").style.width == "0px")
     {
@@ -73,9 +150,9 @@ function openNav() {
    
 }
     
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";    
-    
+function closeNav()
+{
+    document.getElementById("mySidenav").style.width = "0";        
 } 
 
 function empty() {
@@ -175,3 +252,39 @@ function getresult(url) {
 }
 
 */
+
+
+
+
+
+
+
+//(function () {'use strict';
+//    window.addEventListener('load', function () {
+
+
+
+//        if (!$group.data('validate')) {
+//            state = $(this).val() ? true : false;
+//        } else if ($group.data('validate') == "email") {
+//            state = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($(this).val())
+//        }
+
+//        if (state) {
+//            form.classList.add('was-validated');
+//        }
+
+//        //// Fetch all the forms we want to apply custom Bootstrap validation styles to
+//        //var forms = document.getElementsByClassName('needValidate');
+//        //// Loop over them and prevent submission
+//        //var validation = Array.prototype.filter.call(forms, function (form) {
+//        //    form.addEventListener('submit', function (event) {
+//        //        if (form.checkValidity() === false) {
+//        //            event.preventDefault();
+//        //            event.stopPropagation();
+//        //        }
+//        //        form.classList.add('was-validated');
+//        //    }, false);
+//        //});
+//    }, false);
+//})();

@@ -1,0 +1,60 @@
+...started logbook
+defining error handling in dev/prod
+shared background page
+
+
+ <a target="_blank" class="btn btn-secondary btn-sm m-0">Home Page</a>
+
+
+
+&copy; 2019 - StudyLogBook - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+
+
+          <binding protocol="http" bindingInformation="*:53236:192.168.1.102" />
+
+message:
+msgId
+msgstring
+senderId
+receiverId
+bool IsRead
+dateSent
+
+===================
+    public DateTime Registred{get;set;}//mby not set;
+    public string? PhotoPath{get;set;}
+    public int? AppreciationPoints{get;set;}
+    public List<string> Messages{get;set;}
+    public Message Message{get;set;}
+    public int UnreadMessages {get;set;}
+
+
+User Name: [kaKatulea]
+Email: []
+Confirm Email: []
+Password: []
+Confirm Password: []
+
+
+
+add-migration initial -o Data/Migrations
+
+
+    <script>
+        function startRefresh() {
+            $.get('', function (data) {
+                $(document.body).html(data);
+            });
+        }
+
+
+        $(function () {
+            setTimeout(startRefresh, 5000);
+        });
+    </script>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

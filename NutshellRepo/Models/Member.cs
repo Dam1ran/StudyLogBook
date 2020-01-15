@@ -12,6 +12,8 @@ namespace NutshellRepo.Models
         public DateTime RegisteredOn { get; set; }
         public int AppreciatiationPoints { get; set; }
         public int UnreadMessages { get; set; }
+        public int Nutshells { get; set; }
+        public string ProfileStatus { get; set; }
         public bool ShowWelcomeMessage { get; set; }
 #nullable enable
         [MaxLength(256)]

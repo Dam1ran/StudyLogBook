@@ -17,7 +17,15 @@ namespace NutshellRepo.Data.DB
         }
 
         public DbSet<Member> Members { get; set; }
+        public DbSet<UserMessage> Messages { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<UserMessage>()
+                .HasIndex(b => b.ToUserId);
+        }
 
     }
 }

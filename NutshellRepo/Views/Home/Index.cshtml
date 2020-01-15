@@ -1,44 +1,58 @@
-﻿@{
+﻿@using NutshellRepo.Models;
+@inject SignInManager<Member> _signInManager
+@inject UserManager<Member> _userManager
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="row" id="welcomeDiv">
+@{var member = await _userManager.GetUserAsync(User);
 
-    <div class="col col-lg-7" id="mainWelcomeDiv">
-        <div id="stripeDiv">
-            <a href="javascript:void(0)" title="Close" onclick="closeWelcomeDiv()" id="closeWlecomeDiv">&times;</a>
-            <div id="siteNameDiv">
-                NutshellRepo.com
+    if (member == null || member.ShowWelcomeMessage == true)
+    {        
+
+        <div class="row" id="welcomeDiv">
+
+            <div class="col col-lg-7" id="mainWelcomeDiv">
+                <div id="stripeDiv">
+                    <a href="javascript:void(0)" title="Close" onclick="closeWelcomeDiv()" id="closeWlecomeDiv">&times;</a>
+                    <div id="siteNameDiv">
+                        NutshellRepo.com
+                    </div>
+                </div>
+                <h2 class="mt-2 text-white" id="mainParagraph">Welcome to Study Assistance Platform</h2>
+                <p class="ml-1" id="subParagraph">
+                    This site is made with an idea to help learners and seekers!
+                </p>
+                <p id="welcomeText">
+                    <TextTab></TextTab>Use this platform as a handy Log for your studies notes, cheat-sheets, then revise whenever needed. Make them as <u title="Tell the point of a subject!">brief</u> as possible.
+                    So also other users may appreciate those Nutshells :) Have Fun!
+                </p>
+
+                <div class="d-none d-sm-block" id="yellowLine"></div>
+
+                <div id="wlcomeButtons">
+                    <button class="btn btn-info btns">Rules</button>
+                    <button class="btn btn-info btns">Guides</button>
+                </div>
             </div>
+
+            <div class="col col-lg-2 d-none d-sm-inline" id="bigArrow">
+
+            </div>
+
+            <div class="col col-lg-3 d-none d-md-block" id="nutLogoDiv">
+                <img src="~/Site/images/Index/bigLogo.svg" alt="nutshell_logo" height="250" width="250" id="nutLogoThumb" />
+            </div>
+
+
+
         </div>
-        <h2 class="mt-2 text-white" id="mainParagraph">Welcome to Study Assistance Platform</h2>
-        <p class="ml-1" id="subParagraph">
-            This site is made with an idea to help learners and seekers!
-        </p>
-        <p id="welcomeText">
-            <TextTab></TextTab>Use this platform as a handy Log for your studies notes, cheat-sheets, then revise whenever needed. Make them as <u title="Tell the point of a subject!">brief</u> as possible.
-            So also other users may appreciate those Nutshells :) Have Fun!
-        </p>
 
-        <div class="d-none d-sm-block" id="yellowLine"></div>
+    }
 
-        <div id="wlcomeButtons">
-            <button class="btn btn-info btns">Rules</button>
-            <button class="btn btn-info btns">Guides</button>
-        </div>
-    </div>
+}
 
-    <div class="col col-lg-2 d-none d-sm-inline" id="bigArrow">
-
-    </div>
-
-    <div class="col col-lg-3 d-none d-md-block" id="nutLogoDiv">
-        <img src="~/Site/images/Index/bigLogo.svg" alt="nutshell_logo" height="250" width="250" id="nutLogoThumb" />
-    </div>
-
-
-
-</div>
 
 <div class="container" id="motoDiv">
     <div id="motoWordsDiv">
@@ -54,6 +68,6 @@
 @section Scripts
 {
     <link href="~/Site/css/Index.css" rel="stylesheet" />
-    <script src="~/Site/js/index.js"></script>    
+    <script src="~/Site/js/index.js"></script>
 }
 

@@ -5,8 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Migrations\20200102133500_Initial.cs" />
-    <Compile Remove="Data\Migrations\20200102133500_Initial.Designer.cs" />
+    <Compile Remove="ScrapFiles\**" />
+    <Content Remove="ScrapFiles\**" />
+    <EmbeddedResource Remove="ScrapFiles\**" />
+    <None Remove="ScrapFiles\**" />
   </ItemGroup>
 
   <ItemGroup>

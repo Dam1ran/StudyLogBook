@@ -5,14 +5,7 @@ function closeWelcomeDiv() {
 
 
 
-jQuery(document).ready(function () {
-
-    //document.getElementById("welcomeDiv").style.display = "flex";
-
-    //var headerContainer = document.getElementById("headerContainer");
-    //headerContainer.insertAdjacentHTML("afterend", "<div style='background-color:red;'>KIKAT<div/>");    
-    //headerContainer.insertAdjacentHTML("afterend","<div class='container'><img src='/Site/images/Index/bigLogo.svg' alt='nutshell_logo' height='250' width='250'/></div>");
-       
+$(document).ready(function () {
     highlight();
 });
 

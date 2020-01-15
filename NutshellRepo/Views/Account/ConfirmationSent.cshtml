@@ -8,11 +8,12 @@
         <br />
         <h2>A message was sent to specified address!</h2>
         <br />
-        <h3> Follow the link provided in order to confirm your email </h3>
-
+        <h3> Follow the link provided in order to confirm your email.</h3>
         <br />
-        In some cases it may take several minutes before a message reaches the destination. Also check your spam folder.
-        <br /><br/>
+        <h2><em>You wont be able to login whithout confirmation!</em></h2>
+        <br />
+        <p style="color: white; font-size:18px; text-decoration:underline;">In some cases it may take several minutes before a message reaches the destination. Also check your <strong><em>spam</em></strong> folder.</p>
+        <br /><br />
         <div class="text-center">You Make this resource beloved by the day!</div>
         <br />
         <a asp-controller="home" asp-action="index" class="btn btn-info btns homePageBtn" id="homeBtn">Home Page</a>
@@ -27,7 +28,7 @@
         $(document).ready(function () {
             setTimeout(function () {
                 document.getElementById("homeBtn").click();
-            }, 20000);
+            }, 40000);
         });
     </script>
 

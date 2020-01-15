@@ -1,0 +1,34 @@
+NutshellObj
+{
+
+	AuthorId - [1..] X
+
+	DateCreated - [timeStamp] X
+	DateEdited  - [timeStamp]
+	
+
+	FieldOfStudy - [IT] 
+
+	ObjectOfStudy - [C#] X
+
+
+
+	SourceOfStudy - [C# Complete Udemy MaterClass] X
+
+	Compartment - [Using DB with C#] X
+
+
+	Subject - [displaying enitites in a ListBox] X
+
+	Nutshell - [...material about how to pupulate a listbox with simple sql querries...]1000chars
+
+	ThumbNail - [16:9]
+
+	Links? - [sdsd.com]
+
+
+	Appreciates - [#number] X
+	
+	tags - [#cleancode #dev]
+
+}

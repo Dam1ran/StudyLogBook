@@ -1,0 +1,21 @@
+﻿
+    <link href="~/Site/css/User.css" rel="stylesheet" />
+
+    <div id="searchUserDiv">
+
+        <form asp-controller="User" asp-action="ViewProfile" method="get">
+
+            <div class="input-group">
+                <input class="form-control py-2" type="search" placeholder="Enter Username" name="UserName" value="@ViewData["UserName"]">
+                <div class="input-group-append">
+                    <button class="btn btn-secondary btn-sm" type="submit">
+                        <i class="fa fa-search" id="magnifierUser"></i>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+   

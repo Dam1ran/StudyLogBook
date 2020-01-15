@@ -1,0 +1,507 @@
+﻿#searchUserDiv,
+#searchMessagesDiv {
+    height: 60px;
+    width: 257px;
+    border-top: 2px solid grey;
+    position: relative;
+    margin-top: 30px;
+}
+
+#searchUserDiv::before,
+#searchMessagesDiv::before
+{
+    pointer-events:none;
+    position:absolute;
+    content:'Find User:';
+    font-family: roboto, sans-serif;
+    height:18px;
+    line-height:18px;
+    width:auto;
+    left:5px;
+    top:-13px;
+    color:rgb(156,156,156);
+    background-color:rgb(60,50,60);
+    padding:2px 7px 2px 7px;
+    font-weight:700;    
+}
+
+#searchMessagesDiv::before{
+    content:'Search Messages:';
+}
+
+
+
+
+#searchUserDiv .input-group,
+#searchMessagesDiv .input-group
+{
+    width:245px;
+    margin:15px auto auto 5px;
+    transition: 0.3s;
+}
+
+#searchUserDiv button:focus,
+#searchMessagesDiv button:focus
+{
+    box-shadow: 0 0 0 .2rem rgba(0,123,255,0.25);
+    color: black;
+}
+
+#searchUserDiv button i,
+#searchMessagesDiv button i
+
+{
+    transition: 0.4s transform;
+}
+#searchUserDiv button:hover i,
+#searchMessagesDiv button:hover i 
+{
+    transform: scale(1.4);
+}
+
+.divider{
+    background-color: grey;
+    height:2px;
+    margin-top:10px;
+}
+
+
+/*profile outer contaienr*/
+.container_outer_profile {
+    display: flex;
+    flex-wrap:wrap;
+    border: 1px solid rgb(108, 117, 125);
+    border-radius:5px;
+    background-color:rgba(0,0,0,0.5);
+    padding:30px 10px 30px 10px;
+    /*width:100%;*/
+    margin-top:20px;
+    justify-content:center;
+}
+
+
+
+
+.container_inner_profile,
+.nutshells_Div_profile {
+    height: 270px;
+    min-width: 250px;
+    width: 60%;
+    background-color: rgb(230,225,230);
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.9);
+}
+
+
+
+
+.container_inner_profile {    
+    width: 40%;
+}
+
+
+
+.container_inner_profile_div {
+    display:flex;
+    width: 100%;
+
+}
+
+.profile_status {
+    position: absolute;
+    width: 120px;
+    max-width: 120px;
+    height: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: "..";
+    background-color: rgba(0,0,0,0.5);
+    color: wheat;
+    border-top-right-radius: 5px;
+    top: 0;
+    text-align: center;
+    line-height: 20px;
+    cursor: default;
+}
+
+.container_inner_profile img {
+    border: 1px solid grey;
+    border-radius: 5px;
+    border-top-left-radius: 0;
+    box-shadow: 2px 2px 3px black;
+}
+
+.container_inner_profile_desciprion {
+    text-align: center;
+    width: 100%;
+    padding: 5px;
+    overflow: hidden;
+    height:124px;
+}
+
+.username_strings {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: "..";
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+    font-family: apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+    cursor: default;
+}
+
+.container_inner_profile_desciprion .username_strings + .username_strings {
+    font-size: 16px;
+}
+
+.username_registered_on {
+    cursor: default;
+    color: black;
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+@media only screen and (max-width:768px) {
+
+    .container_inner_profile,
+    .nutshells_Div_profile {
+        width:100%;
+    }
+        .username_strings {
+        font-size: 16px;        
+    }
+
+    .container_inner_profile_desciprion .username_strings + .username_strings {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width:500px) {
+
+    .container_outer_profile{
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media only screen and (max-width:400px) {
+
+    .container_outer_profile {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+}
+
+
+
+.container_inner_profile_buttons {
+    height: auto;
+    width: 100%;
+    display: block;
+    padding-top:30px;
+    text-align:center;
+}
+
+.profile_button {
+    margin: 5px;
+    background-color: rgba(0,0,0,0.8);
+    width: 225px;
+    text-align:left;
+    border:none;
+}
+
+    .profile_button:active {
+        box-shadow: none !important;
+        background-color: rgba(0,0,0,0.9) !important;
+    }
+
+.profile_button:focus {
+    box-shadow: none !important;
+}
+
+
+.profile_button i {
+    width: 20px;
+    margin-right: 5px;
+    color: rgb(230,225,230);
+    margin-left: 23px;
+}
+
+
+/*nutshells div in profile*/
+.nutshells_Div_profile_header,
+.nutshells_Div_Message_header {
+    text-align: center;
+    font-family: apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 18px;
+    color: rgba(0,0,0,0.8);
+    margin-top: 5px;
+    font-style: italic;
+    cursor: default;
+}
+
+.nutshells_Div_Message_header {
+    padding: 20px;
+    font-size: 26px;
+    position:relative;
+    margin-bottom:40px;
+}
+
+.nutshells_Div_Message_header::after{
+    position:absolute;
+    content:'';
+    width:250px;
+    height:2px;
+    background-color:#138496;
+    bottom:-15px;
+    left:50%;
+    transform: translateX(-125px);
+}
+
+.container_inner_profile_messages {
+    width: 100%;
+    color: black;
+}
+
+
+.container_outer_messages {
+    border: 1px solid rgb(108, 117, 125);
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.5);
+    padding: 30px 10px 30px 10px;
+    height:auto;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.container_inner_messages {
+    border: 1px solid rgba(0,0,0,0.9);
+    background-color: rgb(230,225,230);
+    justify-content: center;
+    height: auto;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.table_striped thead tr{
+    border-bottom:1px solid grey;
+}
+
+.table_striped{
+    table-layout:fixed;
+    width:100%;
+}
+
+.container_inner_messages form{
+    width: auto;
+    position:relative;
+}
+
+.table_striped th,
+.table_striped td {
+    height: 18px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: "..";
+    font-size: 18px;
+    color: black;
+    padding: 0px 5px;
+    font-family: apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+    background-image: linear-gradient(rgb(202, 202, 202),rgb(230,225,230),rgb(202, 202, 202));
+   
+}
+
+
+
+
+
+.table_striped thead,
+.table_striped .td_subject
+{
+    text-align: left;
+}
+
+
+.container_inner_messages form div {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: -45px;
+    right: 0px;
+}
+.container_inner_messages form table tbody tr {
+    border-top: 2px solid rgb(180,110,80);
+    transition: 0.3s;
+}
+.container_inner_messages form table tbody tr:hover {
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.9);
+    
+}
+.container_inner_messages form table tbody td {
+    background-image: inherit;
+    cursor: default;
+}
+
+
+.container_inner_messages form div button{
+    width: 100px;
+    color:rgb(180, 50, 40);
+}
+
+.container_inner_messages form div button:active,
+.container_inner_messages form div button:focus{
+    box-shadow: none !important;
+    color: black !important;
+}
+
+
+.container_inner_messages form div button i{
+    margin-right: 5px;
+}
+
+.table_striped tbody tr:nth-child(even) {
+    background-color: #bbb;
+}
+
+.table_striped .td_from {
+    max-width: 120px;
+}
+
+.table_striped .td_subject {
+    max-width: 120px;
+}
+
+.table_striped .td_message {
+    width:50%;
+    word-wrap:break-word;
+}
+
+.td_checkbox {
+    max-width: 50px;
+    width:50px;
+}
+
+
+.td_checkbox .fa-align-justify{
+    outline:none;
+    color:rgb(180,110,80);
+    transition:0.3s;
+    width:32px;
+    text-align:center;
+    border-radius:3px;
+    padding-left:1px;
+    padding-top:2px;
+}
+
+.td_checkbox .fa-align-justify:hover{
+    background-color:rgba(0,0,0,0.3);
+    color:wheat;
+}
+
+
+
+
+.toDeleteCheckbox {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    -webkit-appearance: none;
+    outline: none;
+    border-radius: 3px;
+    margin-top:5px;
+    transition: background-color 200ms ease-out;
+    box-shadow: inset 0 0 3px black;
+    border: 2px solid rgb(80,80,80);
+}
+
+
+.toDeleteCheckbox::before {
+
+    text-align: right;
+    text-shadow: 0 0 2px black,0 0 2px black;
+    padding-right: 2px;
+    content: '';
+    color: black;
+    line-height: 2px;
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: 1px;
+    left: 1px;
+    border-radius: 2px;
+    transition: 300ms ease-out;
+}
+
+
+.toDeleteCheckbox:checked::before {    
+    background-color: rgb(220,180,200);
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNC4wLjEsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyMCAyMCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjAgMjA7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+DQoJLnN0MHtmaWxsOm5vbmU7c3Ryb2tlOiNGMTVBMjQ7c3Ryb2tlLXdpZHRoOjM7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjEwO30NCjwvc3R5bGU+DQo8cG9seWxpbmUgY2xhc3M9InN0MCIgcG9pbnRzPSIzLDkuNSA4LjUsMTYuNSAxNi41LDMuNSAiLz4NCjwvc3ZnPg0K);
+}
+
+.toDeleteCheckbox_biger {
+    margin-top: 6px;
+    width: 26px;
+    height: 26px;
+}
+
+.toDeleteCheckbox_biger::before {
+    width: 20px;
+    height: 20px;
+}
+
+.td_checkbox_all{
+    text-align:center;
+}
+
+
+@media only screen and (max-width: 750px) {
+    .td_from {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .table_striped th,
+    .table_striped td {
+        font-size: 15px;
+    }
+
+    .container_outer_messages {
+        margin-left: -15px;
+        margin-right: -15px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    container_inner_messages {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media only screen and (max-width: 486px) {
+    .container_inner_messages form div {        
+        right: 5px;
+    }
+}
+
+
+@media only screen and (max-width: 400px) {
+    .td_subject {
+        display: none;
+    }
+
+    .table_striped .td_message {
+        width: 90%;
+        word-wrap: break-word;
+    }
+
+
+}
+
+.user_homePageBtn{
+    width:200px;
+}
