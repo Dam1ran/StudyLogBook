@@ -12,7 +12,7 @@
 
 
 
-<partial name="_FindUserPartial.cshtml">
+<partial name="_FindUserPartial.cshtml"/>
        
 <div class="divider"></div>
 
@@ -43,7 +43,7 @@
         <div class="container_inner_profile_buttons">
 
 
-            <form asp-action="ViewInbox" asp-controller="User" method="post">
+            <form asp-action="ViewInbox" asp-controller="User" method="get">
                 <button class="btn btn-secondary profile_button" type="submit">
                     <i class="fas fa-envelope fa-1x mr-3"></i>Messages Inbox
                 </button>

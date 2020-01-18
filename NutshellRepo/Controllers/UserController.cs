@@ -7,6 +7,7 @@ using NutshellRepo.Data.DB;
 using NutshellRepo.Data.Security;
 using NutshellRepo.Models;
 using NutshellRepo.ViewModels.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -66,108 +67,248 @@ namespace NutshellRepo.Controllers
 
         }
 
+        [HttpGet]
+        public IActionResult ViewInbox()
+        {
+            return View();           
+        }
+
         [HttpPost]
-        public async Task<IActionResult> ViewInbox()
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ViewInboxList(int PageNumber,string PageNav,string SearchString)
         {
             var user = await _MemberManager.GetUserAsync(User);
 
-            if (user!=null)
-            {
-                var messages = _DbContext.Messages.Where(MSG => MSG.ToUserId == user.Id);
-                if(messages!=null)
-                {
-                    var userPreviewMessages = new List<UserPreviewMessageViewModel>();
-                    foreach (var message in messages) {
+            await Task.Delay(1000);
 
-                        userPreviewMessages.Add(new UserPreviewMessageViewModel() 
-                        { 
+            if (user != null)
+            {
+                IQueryable<UserMessage> messages = null;
+                PageNavigationHelper pageHelper = null;
+                int numberOfmessages;
+
+                if (string.IsNullOrEmpty(SearchString))
+                {
+                    numberOfmessages = _DbContext.Messages.Count(MSG => MSG.ToUserId == user.Id);
+                    pageHelper = new PageNavigationHelper(numberOfmessages, 10, PageNumber - 1, PageNav);
+                    messages = _DbContext.Messages
+                               .Where(MSG => MSG.ToUserId == user.Id)
+                               .OrderByDescending(MSG => MSG.DateTimeSent)
+                               .Skip(pageHelper.PagesToSkip)
+                               .Take(pageHelper.PageSize);
+
+                }
+                else
+                {
+                    numberOfmessages = _DbContext.Messages.Count(MSG => 
+                                    MSG.ToUserId == user.Id
+                                      && (   MSG.FromUser.Contains(SearchString)
+                                          || MSG.Subject.Contains(SearchString)
+                                          || MSG.MessageBody.Contains(SearchString)
+                                          )
+                                                                 );
+
+                    if(numberOfmessages == 0)
+                    {
+                        return PartialView("_NoMsgsFound");
+
+                    }
+                    var pageNumber = PageNav == "search" ? 0 : PageNumber - 1;
+                    pageHelper = new PageNavigationHelper(numberOfmessages, 10, pageNumber, PageNav);
+                    messages = _DbContext.Messages
+                               .Where(MSG =>
+                                            MSG.ToUserId == user.Id
+                                         && (   MSG.FromUser.Contains(SearchString)
+                                             || MSG.Subject.Contains(SearchString)
+                                             || MSG.MessageBody.Contains(SearchString)
+                                            )
+                                      )
+                               .OrderByDescending(MSG => MSG.DateTimeSent)
+                               .Skip(pageHelper.PagesToSkip)
+                               .Take(pageHelper.PageSize);
+
+                }
+                
+
+                if (messages != null && messages.Count() > 0)
+                {
+                    var userPreviewMessagesViewModel = new UserPreviewMessagesViewModel()
+                    {
+                        UserPreviewMessages = new List<UserPreviewMessage>()
+                    };
+                    
+                    userPreviewMessagesViewModel.PageNumber = pageHelper.CurrentPage + 1;
+                    userPreviewMessagesViewModel.isFirstPage = pageHelper.isFirstPage;
+                    userPreviewMessagesViewModel.isLastPage = pageHelper.isLastPage;
+                    userPreviewMessagesViewModel.NumberOfMessages = numberOfmessages;
+
+                    foreach (var message in messages)
+                    {
+                        userPreviewMessagesViewModel.UserPreviewMessages.Add(new UserPreviewMessage()
+                        {
                             Id = _dataProtector.Protect(message.Id),
                             FromUser = message.FromUser,
                             Subject = message.Subject,
                             MessageBody = message.MessageBody,
+                            isRead = message.IsRead,
 
                         });
 
                     }
 
-                    return View("ViewInboxList", userPreviewMessages);
+                    return PartialView("_ViewInboxListPartial", userPreviewMessagesViewModel);
 
+                }
+                else
+                {
+                    return PartialView("_InboxEmptyPartial");
                 }
 
             }
 
             return RedirectToAction("index", "home");
         }
+
+
+
+        
+
+        [HttpDelete]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteMessages(string[] MessagesToDelete)
+        {
+            var user = await _MemberManager.GetUserAsync(User);
+
+            await Task.Delay(1000);
+
+            if (user != null)
+            {
+
+                if (MessagesToDelete == null || MessagesToDelete.Length == 0)
+                {
+                    return RedirectToAction("index", "home");
+                }
+                else
+                {
+                    try
+                    {
+                        foreach (var msgID in MessagesToDelete)
+                        {
+                            var messageToDelete = await _DbContext.Messages.FindAsync(_dataProtector.Unprotect(msgID));
+                            if (messageToDelete!=null)
+                            {
+                                _DbContext.Remove(messageToDelete);
+                            }
+                        }
+
+                       var result = await _DbContext.SaveChangesAsync();
+
+                    }
+                    catch (DbUpdateException ex)
+                    {
+                        //log
+                        throw ex;
+                    }
+
+                    IQueryable<UserMessage> messages = null;
+                    PageNavigationHelper pageHelper = null;
+                    int numberOfmessages;
+
+                    numberOfmessages = _DbContext.Messages.Count(MSG => MSG.ToUserId == user.Id);
+                    pageHelper = new PageNavigationHelper(numberOfmessages, 10, 0, "Delete");
+                    messages = _DbContext.Messages
+                               .Where(MSG => MSG.ToUserId == user.Id)
+                               .OrderByDescending(MSG => MSG.DateTimeSent)
+                               .Skip(pageHelper.PagesToSkip)
+                               .Take(pageHelper.PageSize);
+
+
+                    if (messages != null && messages.Count() > 0)
+                    {
+                        var userPreviewMessagesViewModel = new UserPreviewMessagesViewModel()
+                        {
+                            UserPreviewMessages = new List<UserPreviewMessage>()
+                        };
+
+                        userPreviewMessagesViewModel.PageNumber = pageHelper.CurrentPage + 1;
+                        userPreviewMessagesViewModel.isFirstPage = pageHelper.isFirstPage;
+                        userPreviewMessagesViewModel.isLastPage = pageHelper.isLastPage;
+                        userPreviewMessagesViewModel.NumberOfMessages = numberOfmessages;
+
+                        foreach (var message in messages)
+                        {
+                            userPreviewMessagesViewModel.UserPreviewMessages.Add(new UserPreviewMessage()
+                            {
+                                Id = _dataProtector.Protect(message.Id),
+                                FromUser = message.FromUser,
+                                Subject = message.Subject,
+                                MessageBody = message.MessageBody,
+                                isRead = message.IsRead,
+
+                            });
+
+                        }
+
+                        return PartialView("_ViewInboxListPartial", userPreviewMessagesViewModel);
+                    }
+                    else
+                    {
+                        return PartialView("_InboxEmptyPartial");
+                    }
+
+
+                }
+
+
+            }
+
+            return RedirectToAction("index", "home");
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         [HttpGet]
         public async Task<IActionResult> ReadMessage(string messageId)
         {
 
             //return await Task.Run(()=> Content(messageId));
-            return await Task.Run(()=> Content(_dataProtector.Unprotect(messageId)));
+            return await Task.Run(()=> View());
+
+
         }
 
-        [HttpPost]
-        public async Task<IActionResult> DeleteMessages(List<UserPreviewMessageViewModel> aUserPreviewMessageViewModel)
+
+
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> TestPage3()
         {
-            var user = await _MemberManager.GetUserAsync(User);
+            return await Task.Run(()=> Content("test page 3"));
 
-            if (user != null)
-            {
-                
-                if (aUserPreviewMessageViewModel != null && aUserPreviewMessageViewModel.Count() > 0)
-                {
-                    var messagesToShow = new List<UserPreviewMessageViewModel>();
-
-                    foreach (var item in aUserPreviewMessageViewModel)
-                    {
-                        if (item.isToDelete == true)
-                        {
-                            var userMessageToDelete = new UserMessage() { Id = _dataProtector.Unprotect(item.Id) };
-                            _DbContext.Remove(userMessageToDelete);
-                        }
-                        else
-                        {
-                            messagesToShow.Add(item);
-                        }
-                    }
-
-                    try
-                    {
-                        await _DbContext.SaveChangesAsync();
-                    }
-                    catch (DbUpdateException ex)
-                    {
-                        throw ex;
-                    }
-
-                    ModelState.Clear();
-                    return View("ViewInboxList", messagesToShow);
-
-                }
-                
-
-            }
-
-            return RedirectToAction("index", "home");
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         [HttpPost]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> MessagesCount()
         {
             if (HttpContext.User.Identity.IsAuthenticated)

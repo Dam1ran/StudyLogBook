@@ -1,0 +1,95 @@
+﻿
+
+@{
+    ViewData["Title"] = "Read Message";
+}
+
+<link href="~/Site/css/User.css" rel="stylesheet" />
+
+<div><h4>Inbox Message<i class="far fa-envelope-open fa-1x ml-2 mr-2"></i></h4></div>
+
+<div id="fromUserDiv">
+    <h5>From: </h5> <a asp-controller="User" asp-action="ViewProfile" asp-route-UserName="Dam1rann" id="userName" >pupsiK</a>
+</div>
+
+
+
+<div class="mt-4" id="mediaContainer">
+
+    <div id="upperButtons">
+
+        <div id="backToInboxDiv">
+            <i href="#" class="fas fa-arrow-alt-circle-left fa-1x" id="backToInbox" title="Back To Inbox"></i>
+        </div>
+
+        <div id="subjectDiv">
+            pizdets subject
+        </div>
+
+        <div id="nextMsgDiv">
+            <i class="far fa-arrow-alt-circle-right fa-1x" id="nextMsg" title="Next Message"></i>
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <div id="textContainer">
+
+        <div id="dateSentMsg">
+            12:85: :D
+        </div>
+
+
+        <div id="textWrapper">
+            pizdets si mesaj important
+        </div>
+
+
+
+        <div id="confirmDeleteDiv">
+
+            <div id="finalDeleteButtonDiv" class="btn">
+                <div id="delteBtn">
+                    <i class="fas fa-minus-circle mr-2"></i>Delete
+                </div>
+            </div>
+
+            <div id="cancelBtnDiv" onclick="ClosePopUpConfirmation()" class="btn">
+                <div id="cancelBtn">
+                    <i class="far fa-window-close mr-2"></i>Cancel
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div id="lowerButtons">
+
+            <div id="deleteButtonDiv" onclick="popUpConfirmation()" class="btn">
+                <div id="delteBtn">
+                    <i class="far fa-trash-alt mr-2"></i>Delete
+                </div>
+            </div>
+
+            <div id="replyButtonDiv" class="btn">
+                <div id="replyBtn">
+                    <i class="far fa-comment-dots mr-2"></i>Reply
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@section Scripts
+{
+    <script src="~/Site/js/readMsg.js"></script>
+}

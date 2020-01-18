@@ -42,8 +42,8 @@
                                 <div id="userNameStringDiv">
                                     <a asp-action="ViewProfile" asp-controller="User" asp-route-username="@User.Identity.Name" id="userNameString" title="View Profile">@User.Identity.Name</a>
                                 </div>
-                                <form asp-action="ViewInbox" asp-controller="User" method="post">
-                                    <button type="submit">
+                                <form asp-action="ViewInbox" asp-controller="User" method="get">
+                                    <button type="submit" id="messagesHeaderBtn">
                                         <i class="fas fa-envelope fa-1x" id="envelope" title="Messages"></i>
                                     </button>
                                 </form>

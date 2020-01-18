@@ -1,82 +1,90 @@
-﻿@*@model NutshellRepo.ViewModels.User.InboxPreviewMessagesViewModel*@
-@{
-    ViewData["Title"] = "Inbox";
+﻿@{
+    ViewData["Title"] = "Inbox Messages";
 }
-
 
 <link href="~/Site/css/User.css" rel="stylesheet" />
 
 <div id="searchMessagesDiv">
 
-    <form >
-
-        <div class="input-group">
-            <input class="form-control py-2" name="Message" >
-            <div class="input-group-append">
-                <button class="btn btn-secondary btn-sm" type="submit">
-                    <i class="fa fa-search" id="magnifierUser"></i>
-                </button>
-            </div>
-        </div>
-
-    </form>
+   <div class="input-group">
+       <input class="form-control py-2" type="search" id="searchMsgInput">       
+       <button class="btn btn-secondary btn-sm" type="submit" onclick="searchMessageClick()">
+           <i class="fa fa-search" id="magnifierUser"></i>
+       </button>
+       
+   </div>
 
 </div>
 
-    <div class="divider"></div>
 
-    <div class="container_outer_profile">
+<div class="divider"></div>
 
-        <div class="container_inner_profile container_inner_profile_messages">
+<div class="container_outer_messages">
 
-            <form asp-action="ViewInbox" asp-controller="User" method="post">
+    <div id="messagingHeaderButtons">
 
-                <table class="table-bordered">
-                    <thead>
-                        <tr>
-                            <th>From:</th>
-                            <th>Subject:</th>
-                            <th>Message:</th>
-                            <th>Delete NAHUI:</th>
-                        </tr>
-                    </thead>
-                    @*<tbody>
-                        @foreach (var preview in Model.userPreviewMessages)
-                        {
+        <a asp-action="index" asp-controller="home" class="btn btn-primary homePageBtn">
+            <i class="fas fa-home"></i>
+            Home
+        </a>
 
-                            <tr>
-                                <td>
-                                    
-                                    @preview.userPreviewMessage.FromUser
-                                    
-                                
-                                
-                                </td>
-                                <td>@preview.userPreviewMessage.Subject</td>
-                                <td>@preview.userPreviewMessage.MessageBody</td>
-                                <td> <input type="checkbox" asp-for="@preview.isToDelete" /></td>
-                            </tr>
-
-                        }
-                    </tbody>*@
-                </table>
-
-                <div class="form-group">
-                    <input type="submit" value="DELETE" class="btn btn-primary"/>
-                </div>
-
-
-            </form>
-
-
-
-
-        </div>
-
-
+        <button type="button" class="btn btn-secondary deleteBtn" onclick="onDelete()">
+            <i class="far fa-trash-alt"></i>
+            Delete
+        </button>
 
     </div>
 
+    <div class="container_inner_messages">
+
+        <table class="table_striped">
+            <thead>
+                <tr class="tableRow">
+                    <th class="td_from">From:</th>
+                    <th class="td_subject">Subject:</th>
+                    <th class="td_message">Message</th>
+                    <th class="td_checkbox td_checkbox_all">
+                        <input type="checkbox" class="toDeleteCheckbox toDeleteCheckbox_biger" id="mainCheckbox" onclick="clickAll()" />
+                    </th>
+                    <th class="td_checkbox td_checkbox_readme" id="messagesNumber"></th>
+                </tr>
+            </thead>
+        </table>
+
+        <div id="partialMessages">
+            @*<img src="~/Site/images/arrowload.gif" alt="Loading" width="75" height="100"/>*@
+        </div>
+
+    </div>
+
+    <div id="messagingFooterButtons">
+
+        <button type="button" class="btn btn-secondary firstPageBtn" onclick="firstPage()">
+            <i class="fas fa-fast-backward"></i>
+        </button>
+
+        <button type="button" class="btn btn-secondary prevPageBtn" onclick="prevPage()">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <div class="homePageLbl">
+                        
+        </div>
+
+        <button type="button" class="btn btn-secondary nextPageBtn" onclick="nextPage()">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <button type="button" class="btn btn-secondary lastPageBtn" onclick="lastPage()">
+            <i class="fas fa-fast-forward"></i>
+        </button>
+
+    </div>
+
+</div>
 
 
-
+@section Scripts
+{
+    <script src="~/Site/js/messaging.js"></script>
+}

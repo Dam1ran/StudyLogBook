@@ -247,12 +247,6 @@ namespace NutshellRepo.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<IActionResult> TestPage()
-        {            
-            //return await Task.Run(()=>Content("Test Page"));
-            return await Task.Run(()=>View("../User/ViewProfile"));
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]

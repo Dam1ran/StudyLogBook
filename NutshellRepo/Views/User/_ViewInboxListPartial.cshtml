@@ -1,0 +1,80 @@
+﻿@model NutshellRepo.ViewModels.User.UserPreviewMessagesViewModel
+
+<table class="table_striped">
+
+    <tbody>
+
+        @for (var i = 0; i < Model.UserPreviewMessages.Count; i++)
+        {
+
+            <tr class="tableRow">
+
+                @if (Model.UserPreviewMessages[i].isRead==true)
+                {
+                    <td class="td_from td_string">
+                        @Model.UserPreviewMessages[i].FromUser
+                    </td>
+
+                }
+                else
+                {
+                    <td class="td_from td_string font-weight-bold">
+                        @Model.UserPreviewMessages[i].FromUser
+                    </td>
+                }
+
+
+                @if (Model.UserPreviewMessages[i].isRead==true)
+                {
+                    <td class="td_subject td_string font-italic">
+                        @Model.UserPreviewMessages[i].Subject
+                    </td>
+
+                }
+                else
+                {
+                    <td class="td_subject td_string font-weight-bold font-italic">
+                        @Model.UserPreviewMessages[i].Subject
+                    </td>
+                }
+
+
+                @if (Model.UserPreviewMessages[i].isRead==true)
+                {
+                    <td class="td_message text-left td_string">
+                        @Model.UserPreviewMessages[i].MessageBody
+                    </td>
+
+                }
+                else
+                {
+                    <td class="td_message text-left td_string font-weight-bold">
+                        @Model.UserPreviewMessages[i].MessageBody
+                    </td>
+                }
+                
+
+                <td class="td_checkbox">
+
+                    <input type="checkbox" value="@Model.UserPreviewMessages[i].Id" class="toDeleteCheckbox" title="Mark for delete" />
+
+                </td>
+
+                <td class="td_checkbox td_checkbox_readme">
+                    <a asp-action="ReadMessage" asp-controller="User" asp-route-messageId="@Model.UserPreviewMessages[i].Id" title="Read Message">
+                        <i class="fas fa-align-justify fa-2x"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<input name="numberOfMessages" type="hidden" value="@Model.NumberOfMessages" />
+<input name="pageNumber" type="hidden" value="@Model.PageNumber" />
+<input name="isFirstPage" type="hidden" value="@Model.isFirstPage.ToString()" />
+<input name="isLastPage" type="hidden" value="@Model.isLastPage.ToString()" />
+
+
+

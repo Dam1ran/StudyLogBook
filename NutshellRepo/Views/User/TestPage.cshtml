@@ -1,0 +1,32 @@
+﻿@model NutshellRepo.Models.UserMessage
+
+@{
+    ViewData["Title"] = "TestPage";
+}
+
+<h1>TestPage</h1>
+
+
+
+    =======partial shit v=======
+<div id="partial">
+    <partial name="_TestPagePartial.cshtml" data="@Model">
+</div>
+    =======partial shit ^=======
+
+<br />
+<button id="someButton" class="btn btn-secondary" onclick="testSend()">1</button>
+
+
+
+@section Scripts{
+
+    <script src="~/Site/js/user.js"></script>
+
+
+ }
+   
+    
+
+
+

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace NutshellRepo.ViewModels.User
+﻿namespace NutshellRepo.ViewModels.User
 {
-    public class UserPreviewMessageViewModel
+    public class UserPreviewMessage
     {
         public string Id { get; set; }
         public string FromUser { get; set; }
@@ -14,6 +9,7 @@ namespace NutshellRepo.ViewModels.User
 #nullable disable
         public string MessageBody { get; set; }
         public bool isToDelete { get; set; } = false;
+        public bool isRead { get; set; } = false;
 
     }
 }

@@ -3,13 +3,15 @@ $(document).ready(function () {
     document.getElementById("loginA").href = "javascript:void(0)";
 
     if (document.getElementById("userNameString") != null) {
+        let token = $('input[name="__RequestVerificationToken"]').val();
 
         $.ajax({
 
             type: "POST",
-            contentType: "application/json; charset=utf-8",
-            data: document.getElementById("userNameString").innerHTML,
             url: "/user/MessagesCount",
+            data: {
+                __RequestVerificationToken: token
+            },
             success: function (data)
             {
                 let result = jQuery.parseJSON(data.result);                              
@@ -25,41 +27,18 @@ $(document).ready(function () {
                     envelope.title = "No New Messages";
                     envelope.style.color = "rgb(160,160,170)";
                 }
-                
+
             }        
 
         });
-        
+
+
     }
    
-
-
-    //alert(document.getElementById("userNameString").innerHTML);
 });
 
 
 
-
-
-
-//$(document).ready(function () {          
-
-
-//    document.getElementById("loginA").setAttribute('href','javascript:void(0)');
-
-//    //if (document.getElementById("userNameString").val() != null)
-//    //{
-//    //}
-
-//    alert(document.getElementById("userNameString").val());
-
-//    alert("sukanahui");
-//    //$.ajax({
-//    //    url: @Url.Action("MessagesCount","account");
-
-//    //});
-    
-//});
 
 
 

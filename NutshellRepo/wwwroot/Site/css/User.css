@@ -40,6 +40,14 @@
     transition: 0.3s;
 }
 
+#searchUserDiv button,
+#searchMessagesDiv button
+{
+   border-bottom-left-radius:0;
+   border-top-left-radius:0;
+}
+
+
 #searchUserDiv button:focus,
 #searchMessagesDiv button:focus
 {
@@ -49,7 +57,6 @@
 
 #searchUserDiv button i,
 #searchMessagesDiv button i
-
 {
     transition: 0.4s transform;
 }
@@ -63,6 +70,7 @@
     background-color: grey;
     height:2px;
     margin-top:10px;
+    width:100%;
 }
 
 
@@ -270,7 +278,7 @@
     border: 1px solid rgb(108, 117, 125);
     border-radius: 5px;
     background-color: rgba(0,0,0,0.5);
-    padding: 30px 10px 30px 10px;
+    padding: 5px 10px;
     height:auto;
     margin-top: 20px;
     text-align: center;
@@ -280,9 +288,9 @@
     border: 1px solid rgba(0,0,0,0.9);
     background-color: rgb(230,225,230);
     justify-content: center;
-    height: auto;
-    margin-top:20px;
-    margin-bottom:20px;
+    height: 460px;
+    margin-top:5px;
+    margin-bottom:5px;
 }
 
 .table_striped thead tr{
@@ -294,10 +302,11 @@
     width:100%;
 }
 
-.container_inner_messages form{
+
+/*.container_inner_messages form{
     width: auto;
     position:relative;
-}
+}*/
 
 .table_striped th,
 .table_striped td {
@@ -324,42 +333,102 @@
 }
 
 
-.container_inner_messages form div {
+/*.container_inner_messages form div {
     margin: 0;
     padding: 0;
     position: absolute;
     top: -45px;
     right: 0px;
-}
-.container_inner_messages form table tbody tr {
-    border-top: 2px solid rgb(180,110,80);
+}*/
+.container_inner_messages table tbody tr {
+    border-bottom: 2px solid rgb(180,110,80);
     transition: 0.3s;
 }
-.container_inner_messages form table tbody tr:hover {
+.container_inner_messages table tbody tr:hover {
     box-shadow: inset 0 0 10px rgba(0,0,0,0.9);
     
 }
-.container_inner_messages form table tbody td {
+.container_inner_messages table tbody td {
     background-image: inherit;
     cursor: default;
 }
 
 
-.container_inner_messages form div button{
-    width: 100px;
-    color:rgb(180, 50, 40);
+#messagingHeaderButtons {
+    display: flex;
+    justify-content: space-between;
+}
+#messagingFooterButtons{
+    display:flex;
+    justify-content:end;
 }
 
-.container_inner_messages form div button:active,
-.container_inner_messages form div button:focus{
+#messagingFooterButtons button{
+    margin: 0 4px;
+    border:none!important;
+    box-shadow: none !important;
+    box-shadow: none !important;
+
+}
+
+.firstPageBtn,
+.prevPageBtn,
+.nextPageBtn,
+.lastPageBtn {
+    color: rgb(30,25,31);
+    background-color: wheat;
+    transition: 0.5s;
+}
+
+.firstPageBtn:focus,
+.prevPageBtn:focus,
+.nextPageBtn:focus,
+.lastPageBtn:focus {
+    background-color: rgb(180, 140, 130);
+}
+
+
+
+.homePageLbl {
+    width: 60px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 0.25rem;
+    line-height: 36px;
+    background-color: rgb(40, 40, 50);
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: "..";
+    cursor: default;
+    color: wheat;
+    box-shadow: inset 0 0 5px wheat;
+}
+
+.container_outer_messages div .deleteBtn,
+.container_outer_messages div .homePageBtn {
+    width: 100px;
+}
+
+.container_outer_messages div .deleteBtn {
+    color: rgb(180, 50, 40);
+}
+
+
+.container_outer_messages div .deleteBtn:active,
+.container_outer_messages div .deleteBtn:focus,
+.container_outer_messages div .homePageBtn:active,
+.container_outer_messages div .homePageBtn:focus {
     box-shadow: none !important;
     color: black !important;
 }
 
 
-.container_inner_messages form div button i{
-    margin-right: 5px;
-}
+
+
+/*.container_inner_messages div button i{
+    margin-right: 25px;
+}*/
 
 .table_striped tbody tr:nth-child(even) {
     background-color: #bbb;
@@ -480,12 +549,17 @@
         padding-left: 0;
         padding-right: 0;
     }
-}
 
-@media only screen and (max-width: 486px) {
-    .container_inner_messages form div {        
-        right: 5px;
+    #messagingHeaderButtons {
+        margin-left: 5px;
+        margin-right: 5px;
     }
+
+    .container_inner_messages {       
+        height: 392px;        
+    }
+
+
 }
 
 
@@ -504,4 +578,22 @@
 
 .user_homePageBtn{
     width:200px;
+}
+
+/*thead {
+    height: 39.5px;
+}*/
+
+.messages_Div_Message_body {
+    font-size: 40px;
+    color: rgb(30,25,31);
+    font-weight: 700;
+    font-style: italic;
+    margin-top: 130px;
+    cursor:default;
+}
+
+#messagesNumber {
+    text-align:center;
+    cursor:default;
 }
