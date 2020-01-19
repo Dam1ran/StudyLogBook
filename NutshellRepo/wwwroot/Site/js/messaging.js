@@ -192,6 +192,35 @@ function onResponse(data) {
         enableNextLast();
     }
 
+
+    let token = $('input[name="__RequestVerificationToken"]').val();
+
+    $.ajax({
+
+        type: "POST",
+        url: "/user/MessagesCount",
+        data: {
+            __RequestVerificationToken: token
+        },
+        success: function (data) {
+            let result = jQuery.parseJSON(data.result);
+
+            if (result > 0) {
+                let envelope = document.getElementById("envelope");
+
+                envelope.title = `${result} New Message${(result > 1) ? "s" : ""}`;
+                envelope.style.color = "wheat";
+            }
+            else {
+                envelope.title = "No New Messages";
+                envelope.style.color = "rgb(160,160,170)";
+            }
+
+        }
+
+    });
+
+
 }
 
 

@@ -242,6 +242,10 @@ namespace NutshellRepo.Migrations
                         .HasColumnType("nvarchar(1000)")
                         .HasMaxLength(1000);
 
+                    b.Property<string>("RepliedToMsgId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
+
                     b.Property<string>("Subject")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);

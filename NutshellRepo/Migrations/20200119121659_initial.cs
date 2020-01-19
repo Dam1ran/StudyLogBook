@@ -61,6 +61,7 @@ namespace NutshellRepo.Migrations
                     Id = table.Column<string>(nullable: false),
                     Subject = table.Column<string>(maxLength: 256, nullable: true),
                     ToUserId = table.Column<string>(maxLength: 450, nullable: true),
+                    RepliedToMsgId = table.Column<string>(maxLength: 450, nullable: true),
                     FromUser = table.Column<string>(maxLength: 50, nullable: true),
                     MessageBody = table.Column<string>(maxLength: 1000, nullable: false),
                     DateTimeSent = table.Column<DateTime>(nullable: false),

@@ -13,6 +13,8 @@ namespace NutshellRepo.Models
         public string? Subject { get; set; }
         [MaxLength(450)]
         public string? ToUserId { get; set; }
+        [MaxLength(450)]
+        public string? RepliedToMsgId { get; set; }
         [MaxLength(50)]
         public string? FromUser { get; set; }
 #nullable disable

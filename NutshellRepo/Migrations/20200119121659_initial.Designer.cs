@@ -10,7 +10,7 @@ using NutshellRepo.Data.DB;
 namespace NutshellRepo.Migrations
 {
     [DbContext(typeof(StudyLogBookDbContext))]
-    [Migration("20200118174726_initial")]
+    [Migration("20200119121659_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -243,6 +243,10 @@ namespace NutshellRepo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1000)")
                         .HasMaxLength(1000);
+
+                    b.Property<string>("RepliedToMsgId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.Property<string>("Subject")
                         .HasColumnType("nvarchar(256)")

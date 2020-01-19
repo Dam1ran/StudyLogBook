@@ -201,7 +201,11 @@ namespace NutshellRepo.Controllers
                             }
                         }
 
-                       var result = await _DbContext.SaveChangesAsync();
+                        var result = await _DbContext.SaveChangesAsync();
+
+                        user.UnreadMessages = _DbContext.Messages.Count(MSG => MSG.IsRead == false);
+
+                        await _DbContext.SaveChangesAsync();
 
                     }
                     catch (DbUpdateException ex)
@@ -209,6 +213,9 @@ namespace NutshellRepo.Controllers
                         //log
                         throw ex;
                     }
+
+                    
+                    
 
                     IQueryable<UserMessage> messages = null;
                     PageNavigationHelper pageHelper = null;
@@ -294,6 +301,15 @@ namespace NutshellRepo.Controllers
 
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> DeleteReadMessage(string messageId)
+        {
+
+            //return await Task.Run(()=> Content(messageId));
+            return await Task.Run(() => View());
+
+
+        }
 
 
 
