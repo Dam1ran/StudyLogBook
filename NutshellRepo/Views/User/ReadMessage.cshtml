@@ -1,4 +1,4 @@
-﻿
+﻿@model NutshellRepo.ViewModels.User.ReadMessageViewModel
 
 @{
     ViewData["Title"] = "Read Message";
@@ -6,18 +6,108 @@
 
 <link href="~/Site/css/User.css" rel="stylesheet" />
 
-<div><h4>Inbox Message<i class="far fa-envelope-open fa-1x ml-2 mr-2"></i></h4></div>
+<div class="mt-5 mb-3"><h4>Inbox Message<i class="far fa-envelope-open fa-1x ml-2 mr-2"></i></h4></div>
 
 <div id="fromUserDiv">
-    <h5>From: </h5> <a asp-controller="User" asp-action="ViewProfile" asp-route-UserName="Dam1rann" id="userName" >pupsiK</a>
+    <h5>From: </h5> <a asp-controller="User" asp-action="ViewProfile" asp-route-UserName="@Model.FromUser" id="userName">@Model.FromUser</a>
 </div>
 
-<div id="repliedTo">
-    <h5>Replied To: </h5> <a asp-controller="User" asp-action="ReadMessage" asp-route-UserName="repliedMsgId" id="userName">replied msg string</a>
+@if (!string.IsNullOrEmpty(@Model.RepliedTo))
+{
+    <div id="repliedTo" class="mt-2">
+        <h5>Replied To: </h5>
+        <div id="replyString">@Model.RepliedTo</div>
+    </div>
+}
+
+
+<div class="container_outer_messages">
+
+    <div id="messageHeaderButtons">
+
+        <form asp-action="ViewInbox" asp-controller="User" method="post">
+            <button class="btn btn-secondary btn_refresh" title="Back To Inbox" id="back_to_inbox">
+                <i class="fas fa-arrow-alt-circle-left fa-2x"></i>
+            </button>
+        </form>
+
+
+        <div id="subjectDiv">
+            @Model.Subject
+        </div>
+
+        @*<form asp-action="MarkAsUnread" asp-controller="User" method="post">*@
+            <button class="btn btn-secondary btn_refresh" title="Mark as Unread" onclick="markAsUnreadMessage()">
+                <i class="fas fa-book fa-2x" id="nextMsg"></i>
+            </button>
+        @*</form>*@
+
+    </div>
+
+    <div class="container_inner_messages container_inner_message">
+
+        <div id="dateSentMsg">
+            @Model.DateTimeSent
+        </div>
+
+        <div id="textWrapper">
+            @Model.Body
+        </div>
+
+        <div id="confirmDeleteDiv">
+
+        <div id="finalDeleteButtonDiv" class="btn">
+            <div id="delteBtn" onclick="deleteMessage()">
+                <i class="fas fa-minus-circle mr-2"></i>Delete
+                <input name="MsgId" type="hidden" value="@Model.MessageId"/>
+            </div>
+        </div>
+
+        <div id="cancelBtnDiv" onclick="ClosePopUpConfirmation()" class="btn">
+            <div id="cancelBtn">
+                <i class="far fa-window-close mr-2"></i>Cancel
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+    
+
+
+    <div id="lowerButtons">
+
+        <div id="deleteButtonDiv" onclick="popUpConfirmation()" class="btn">
+            <div id="delteBtn">
+                <i class="far fa-trash-alt mr-2"></i>Delete
+            </div>
+        </div>
+
+        <div id="replyButtonDiv" class="btn">
+            <div id="replyBtn">
+                <i class="far fa-comment-dots mr-2"></i>Reply
+            </div>
+        </div>
+
+    </div>
+
 </div>
 
 
-<div class="mt-4" id="mediaContainer">
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="mt-4" id="mediaContainer">
 
     <div id="upperButtons">
 
@@ -26,7 +116,7 @@
         </div>
 
         <div id="subjectDiv">
-            pizdets subject
+            @Model.Subject
         </div>
 
         <div id="nextMsgDiv">
@@ -43,12 +133,12 @@
     <div id="textContainer">
 
         <div id="dateSentMsg">
-            12:85: :D
+            @Model.DateTimeSent
         </div>
 
 
         <div id="textWrapper">
-            pizdets si mesaj important
+            @Model.Body
         </div>
 
 
@@ -89,7 +179,7 @@
 
     </div>
 
-</div>
+</div>*@
 
 
 @section Scripts

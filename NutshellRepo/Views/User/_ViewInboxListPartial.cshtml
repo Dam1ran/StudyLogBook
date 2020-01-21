@@ -61,9 +61,11 @@
                 </td>
 
                 <td class="td_checkbox td_checkbox_readme">
-                    <a asp-action="ReadMessage" asp-controller="User" asp-route-messageId="@Model.UserPreviewMessages[i].Id" title="Read Message">
-                        <i class="fas fa-align-justify fa-2x"></i>
-                    </a>
+                    <form asp-action="ReadMessage" asp-controller="User"  method="post">
+                        <button type="submit" title="Read Message" id="read_msg_btn" name="messageId" value="@Model.UserPreviewMessages[i].Id">
+                            <i class="fas fa-align-justify fa-2x"></i>
+                        </button>
+                    </form>
                 </td>
             </tr>
         }

@@ -28,9 +28,15 @@
             Home
         </a>
 
-        <a asp-action="ViewInbox" asp-controller="User" class="btn btn-secondary btn_refresh">
-            <i class="fas fa-sync"></i>           
-        </a>
+
+        <form asp-action="ViewInbox" asp-controller="User" method="post">
+            <button class="btn btn-secondary btn_refresh">
+                <i class="fas fa-sync"></i>
+            </button>
+        </form>
+
+
+        
 
         <button type="button" class="btn btn-secondary deleteBtn" onclick="onDelete()">
             <i class="far fa-trash-alt"></i>

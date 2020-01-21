@@ -10,7 +10,7 @@ using NutshellRepo.Data.DB;
 namespace NutshellRepo.Migrations
 {
     [DbContext(typeof(StudyLogBookDbContext))]
-    [Migration("20200119121659_initial")]
+    [Migration("20200119220053_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

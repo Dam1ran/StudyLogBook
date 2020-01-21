@@ -19,7 +19,7 @@ $(document).ready(function () {
                 if (result > 0) {
                     let envelope = document.getElementById("envelope");
 
-                    envelope.title = `${result} New Message${(result > 1) ? "s" : ""}`;
+                    envelope.title = `${result} Unread Message${(result > 1) ? "s" : ""}`;
                     envelope.style.color = "wheat";
                 }
                 else

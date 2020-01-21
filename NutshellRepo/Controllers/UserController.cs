@@ -67,7 +67,8 @@ namespace NutshellRepo.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult ViewInbox()
         {
             return View();           
@@ -203,7 +204,11 @@ namespace NutshellRepo.Controllers
 
                         var result = await _DbContext.SaveChangesAsync();
 
-                        user.UnreadMessages = _DbContext.Messages.Count(MSG => MSG.IsRead == false);
+                        user.UnreadMessages = _DbContext.Messages
+                            .Count(MSG =>
+                                       MSG.ToUserId == user.Id
+                                    && MSG.IsRead == false
+                                   );
 
                         await _DbContext.SaveChangesAsync();
 
@@ -291,25 +296,230 @@ namespace NutshellRepo.Controllers
 
 
 
-        [HttpGet]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ReadMessage(string messageId)
         {
+            if (string.IsNullOrEmpty(messageId))
+            {
+                return RedirectToAction("index", "home");
+            }
+            else
+            {
+                var user = await _MemberManager.GetUserAsync(User);
 
-            //return await Task.Run(()=> Content(messageId));
-            return await Task.Run(()=> View());
+                if (user!=null)
+                {
 
+                   var message = _DbContext.Messages
+                              .Where(MSG => 
+                                            MSG.Id == _dataProtector.Unprotect(messageId)                                        
+                                         && MSG.ToUserId == user.Id
+                                    )
+                              .FirstOrDefault();
+
+                    if (message!=null)
+                    {
+                        //not done
+                        var repliedMsgString = "";
+                        if (message.RepliedToMsgId!=null)
+                        {
+                            var repliedMessage = _DbContext.Messages
+                              .Where(MSG => MSG.Id == message.RepliedToMsgId)
+                              .FirstOrDefault();
+
+                            repliedMsgString = repliedMessage.MessageBody;
+                        }
+
+                        message.IsRead = true;
+
+                        await _DbContext.SaveChangesAsync();
+
+                        user.UnreadMessages = _DbContext.Messages
+                            .Count(MSG =>
+                                       MSG.ToUserId == user.Id
+                                    && MSG.IsRead == false
+                                   );
+
+                        await _DbContext.SaveChangesAsync();
+
+                        var readMessageViewModel = new ReadMessageViewModel()
+                        {
+                            MessageId = _dataProtector.Protect(message.Id),
+                            RepliedTo = repliedMsgString.Length <31 ? repliedMsgString: "["+repliedMsgString.Substring(0, 30)+"...]",                            
+                            DateTimeSent = message.DateTimeSent,
+                            FromUser = message.FromUser,
+                            Subject = message.Subject,
+                            Body = message.MessageBody
+                        };
+
+
+                        return View(readMessageViewModel);
+
+
+                    }
+
+
+
+
+                }
+
+
+
+            }
+
+            return RedirectToAction("index", "home");
 
         }
+
+
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteReadMessage(string messageId)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteReadMessage(string MessageIdToDelete)
         {
+            if (string.IsNullOrEmpty(MessageIdToDelete))
+            {
+                return NotFound();
+            }
+            else
+            {
+                var user = await _MemberManager.GetUserAsync(User);
 
-            //return await Task.Run(()=> Content(messageId));
-            return await Task.Run(() => View());
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                try
+                {
+                    var MsgIdToDelete = _dataProtector.Unprotect(MessageIdToDelete);
+
+                    var messageToDelete = await _DbContext.Messages.FindAsync(MsgIdToDelete);
+
+                    if (messageToDelete.ToUserId==user.Id)
+                    {
+                        _DbContext.Remove(messageToDelete);
+                    }
+
+                    await _DbContext.SaveChangesAsync();
+
+                    user.UnreadMessages = _DbContext.Messages
+                            .Count(MSG =>
+                                       MSG.ToUserId == user.Id
+                                    && MSG.IsRead == false
+                                   );
+
+                    await _DbContext.SaveChangesAsync();
+
+                }
+                catch (Exception)
+                {                    
+                    return NotFound();
+                }
+
+                return Json("Ok");
+
+            }
 
 
         }
+
+
+        [HttpPut]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> MarkAsUnread(string MessageIdToMarkAsUnread)
+        {
+            if (string.IsNullOrEmpty(MessageIdToMarkAsUnread))
+            {
+                return NotFound();
+            }
+            else
+            {
+                var user = await _MemberManager.GetUserAsync(User);
+
+                if (user == null)
+                {
+                    return RedirectToAction("index", "home");
+                }
+
+
+                try
+                {
+                    var messageIdToMarkAsUnread = _dataProtector.Unprotect(MessageIdToMarkAsUnread);
+
+                    var markedMessage = _DbContext.Messages
+                              .Where(MSG => MSG.Id == messageIdToMarkAsUnread)
+                              .FirstOrDefault();
+
+                    if (markedMessage!=null)
+                    {
+                        markedMessage.IsRead = false;
+
+                        await _DbContext.SaveChangesAsync();
+
+                        user.UnreadMessages = _DbContext.Messages
+                                .Count(MSG =>
+                                           MSG.ToUserId == user.Id
+                                        && MSG.IsRead == false
+                                       );
+
+                        await _DbContext.SaveChangesAsync();
+
+                        return Json("Ok");
+
+                    }
+
+
+                }
+                catch (Exception)
+                {
+                    return NotFound();
+                }
+
+
+
+
+
+                
+
+
+                //try
+                //{
+                //    var MsgIdToDelete = _dataProtector.Unprotect(MessageIdToMarkAsUnread);
+
+                //    var messageToDelete = await _DbContext.Messages.FindAsync(MsgIdToDelete);
+
+                //    if (messageToDelete.ToUserId == user.Id)
+                //    {
+                //        _DbContext.Remove(messageToDelete);
+                //    }
+
+                //    await _DbContext.SaveChangesAsync();
+
+                //    user.UnreadMessages = _DbContext.Messages
+                //            .Count(MSG =>
+                //                       MSG.ToUserId == user.Id
+                //                    && MSG.IsRead == false
+                //                   );
+
+                //    await _DbContext.SaveChangesAsync();
+
+                //}
+                //catch (Exception)
+                //{
+                //    return NotFound();
+                //}
+
+                //return Ok();
+
+            }
+
+            return NotFound();
+
+        }
+
+
 
 
 

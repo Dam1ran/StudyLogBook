@@ -126,7 +126,6 @@ namespace NutshellRepo.Controllers
                                 ,Request.Scheme
                             );
 
-                        //sending confirmation email
                         var response = await _TemplatedEmailSender
                             .SendConfirmationEmailAsync(
                                     member.Email,

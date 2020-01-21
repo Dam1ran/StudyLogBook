@@ -14,7 +14,7 @@ namespace NutshellRepo.Models
         public int UnreadMessages { get; set; }
         public int Nutshells { get; set; }
         public string ProfileStatus { get; set; }
-        public bool ShowWelcomeMessage { get; set; }
+        public bool ShowWelcomeMessage { get; set; } = true;
 #nullable enable
         [MaxLength(256)]
         public string? PhotoPath { get; set; }

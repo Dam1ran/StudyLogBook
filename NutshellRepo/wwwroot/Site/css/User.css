@@ -286,6 +286,7 @@
 
 .container_inner_messages {
     border: 1px solid rgba(0,0,0,0.9);
+    border-bottom:none;
     background-color: rgb(230,225,230);
     justify-content: center;
     height: 460px;
@@ -333,13 +334,6 @@
 }
 
 
-/*.container_inner_messages form div {
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    top: -45px;
-    right: 0px;
-}*/
 .container_inner_messages table tbody tr {
     border-bottom: 2px solid rgb(180,110,80);
     transition: 0.3s;
@@ -354,13 +348,33 @@
 }
 
 
-#messagingHeaderButtons {
+#messagingHeaderButtons,
+#messageHeaderButtons {
     display: flex;
     justify-content: space-between;
 }
+
+
+#subjectDiv {
+    text-align: center;
+    line-height: 42px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: "..";
+    cursor: default;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 18px;
+    border-top: 3px double rgb(230,225,230);
+}
+
+#messageHeaderButtons {
+    width: 100%;
+}
+
 #messagingFooterButtons{
     display:flex;
-    justify-content:end;
+    justify-content:flex-end;
 }
 
 #messagingFooterButtons button{
@@ -426,7 +440,6 @@
 }
 
 .btn_refresh {
-    /*background-color: rgba(100,100,100,0.1);*/
     background-color: transparent;
     border:none;
     color: rgb(180,180,180);
@@ -434,9 +447,6 @@
 }
 
 
-/*.container_inner_messages div button i{
-    margin-right: 25px;
-}*/
 
 .table_striped tbody tr:nth-child(even) {
     background-color: #bbb;
@@ -461,14 +471,23 @@
 }
 
 
-.td_checkbox .fa-align-justify{
-    outline:none;
-    color:rgb(180,110,80);
-    transition:0.3s;
-    width:32px;
-    text-align:center;
-    border-radius:3px;
-    padding-left:1px;
+#read_msg_btn {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+
+.td_checkbox .fa-align-justify {
+    outline: none;
+    color: rgb(180,110,80);
+    transition: 0.3s;
+    width: 32px;
+    text-align: center;
+    border-radius: 3px;
+    padding-left:0;
     padding-top:2px;
 }
 
@@ -477,6 +496,9 @@
     color:wheat;
 }
 
+.td_checkbox .fa-align-justify:active{
+    background-color:rgba(0,0,0,0.7);
+}
 
 
 
@@ -535,6 +557,37 @@
 }
 
 
+#textWrapper {
+    width: auto;
+    height: 424px;
+    margin-left: 5px;
+    /*margin-right: auto;*/
+    margin-right: 5px;
+    padding-right: 5px;
+    margin-top: 10px;
+    line-height: 1.7;
+    text-align: left;
+    font-family: 'Times New Roman',helvetica;
+    font-size: 18px;
+    overflow-y: auto;
+    color: black;
+    background-color:rgb(255, 245, 235);
+}
+
+    #textWrapper::-webkit-scrollbar {
+        width: 12px;
+        border-radius: 5px;
+        background-color: rgb(50,50,60);
+    }
+
+    #textWrapper::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5);
+        background-color: rgb(30, 70, 30);
+    }
+
+
+
 @media only screen and (max-width: 750px) {
     .td_from {
         display: none;
@@ -558,13 +611,23 @@
         padding-right: 0;
     }
 
-    #messagingHeaderButtons {
+    #messagingHeaderButtons{
         margin-left: 5px;
         margin-right: 5px;
     }
 
-    .container_inner_messages {       
-        height: 392px;        
+    #messageHeaderButtons{
+        padding-right:5px;
+        padding-left:5px;
+    }
+
+    .container_inner_messages {
+        height: 388px;
+    }
+
+    #textWrapper {
+        font-size: 16px;
+        height:356px;
     }
 
 
@@ -602,4 +665,114 @@
 #messagesNumber {
     text-align:center;
     cursor:default;
+}
+
+#userName{
+    text-decoration:underline;
+    font-size:20px;
+    color:wheat;
+    text-shadow: 0 0 3px black;
+    margin-left:20px;
+    font-style:italic;
+}
+
+#replyString{
+    font-size:16px;
+    line-height:16px;
+    height:20px;
+    font-style:italic;
+    color: rgb(230,225,230);
+    border: 1px solid grey;
+    width:auto;
+    border-radius:3px;
+    padding-left:3px;
+    box-shadow: inset 0 0 3px black;
+}
+
+#dateSentMsg {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 22px;
+    height: 22px;
+    text-align: right;
+    margin-right: 5px;
+    margin-left: auto;
+    margin-top: 2px;
+    position: relative;
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
+    text-shadow: 0 0 2px black;
+}
+
+#lowerButtons {
+    display: flex;
+    justify-content: center;
+    width: calc(100% - 2px);
+    transition: 0.5s;
+    background-color: grey;
+    background-color: rgb(200,200,205);
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-top: -5px;
+    margin-bottom:10px;
+}
+
+#deleteButtonDiv, #finalDeleteButtonDiv {
+    margin-left: auto;
+    margin-right: 0;
+    height: 30px;
+    border: 2px solid transparent;
+    width: 50%;
+    line-height: 0.9;
+    border-radius: 3px;
+    color: rgb(50, 0, 0);
+    font-weight: 600;
+}
+
+#replyButtonDiv, #cancelBtnDiv {
+    margin-left: 0;
+    margin-right: auto;
+    border: 2px solid transparent;
+    height: 30px;
+    width: 50%;
+    line-height: 0.9;
+    border-radius: 3px;
+    font-weight: 600;
+    color: rgb(20,70,20);
+}
+
+#finalDeleteButtonDiv {
+    color: orangered;
+}
+
+#deleteButtonDiv:hover, #finalDeleteButtonDiv:hover {
+    border: 2px solid rgb(80,80,80);
+}
+
+#deleteButtonDiv:active, #finalDeleteButtonDiv:active {
+    border: 2px solid rgb(50,50,50);
+    background-color: rgba(100,0,0,0.2);
+}
+
+#cancelBtnDiv {
+    color: darkgoldenrod;
+}
+
+#replyButtonDiv:hover, #cancelBtnDiv:hover {
+    border: 2px solid rgb(80,80,80);
+}
+
+#replyButtonDiv:active, #cancelBtnDiv:active {
+    border: 2px solid rgb(50,50,50);
+    background-color: rgba(0,50,0,0.2);
+}
+
+#confirmDeleteDiv {
+    display: none;
+    position: relative;
+    height: 30px;
+    bottom: 29px;
+    text-align: center;
+    width: 100%;
+    background-color: rgb(90,90,90);
 }
